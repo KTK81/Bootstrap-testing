@@ -18,7 +18,61 @@
 
   </head>
 
+<script>
+        var pomocnyNazov = "pic\\rea-office-";
+        var vyska = "10";
+        var sirka = "10";
+        var farba = "biela";
+        var onOFF = "hidden";
 
+
+        function showDimensions() {
+            document.getElementById("rozmerVyber").style.display = "block";
+            document.getElementById("farbaVyber").style.display = "none";
+        }
+
+        function showColor() {
+            // updateImage();
+            document.getElementById("rozmerVyber").style.display = "none";
+            document.getElementById("farbaVyber").style.display = "block";
+        }
+
+        function changeColor(color) {
+            farba = color;
+            updateImage();
+        }
+
+        function changeWidth(width) {
+            sirka = width;
+            updateImage();
+        }
+
+        function changeHeight(height) {
+            vyska = height;
+            updateImage();
+        }
+
+        function updateImage() {
+            document.getElementById("myImg").src = pomocnyNazov + vyska + "-" + sirka + "-" + farba + ".jpg";
+            document.getElementById("myImg2").src = pomocnyNazov + vyska + "-" + sirka + "-" + farba + ".jpg";
+        }
+
+        // function showHide () {
+        //     if (onOFF== "hidden") {
+        //         onOFF = "visible";
+        //     }
+        //     else {
+        //         onOFF = "hidden";
+        //     }
+            
+            document.getElementById('vyberMoznosti').style.visibility = onOFF;
+        }
+
+        window.onload = function (e) {
+            showDimensions();
+            updateImage();
+        }
+    </script>
 
 
 
@@ -81,8 +135,15 @@
         </div>
 
         <div class="col-md-8">
-          <img class="img-fluid" src="http://placehold.it/750x500" alt="">
+          <!-- <img class="img-fluid" id="myImg2" src="pic\\rea-office-20-20-navarra.jpg" alt=""> -->
+          <img class="img-fluid" src="pic\\rea-office-20-20-navarra.jpg" id="myImg2">
         </div>
+
+
+        <div class="showImageMain">
+            <img id="myImg2">
+        </div>
+
 
       </div>
       <!-- /.row -->
