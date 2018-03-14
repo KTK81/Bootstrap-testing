@@ -26,6 +26,12 @@
         var onOFF = "hidden";
 
 
+        function changeNameTest() {
+          document.getElementById("testovacie").innerHTML = '6666';
+        }
+  
+
+
         function showDimensions() {
             document.getElementById("rozmerVyber").style.display = "block";
             document.getElementById("farbaVyber").style.display = "none";
@@ -53,18 +59,16 @@
         }
 
         function updateImage() {
-            document.getElementById("myImg").src = pomocnyNazov + vyska + "-" + sirka + "-" + farba + ".jpg";
             document.getElementById("myImg2").src = pomocnyNazov + vyska + "-" + sirka + "-" + farba + ".jpg";
         }
 
-        // function showHide () {
-        //     if (onOFF== "hidden") {
-        //         onOFF = "visible";
-        //     }
-        //     else {
-        //         onOFF = "hidden";
-        //     }
-
+        function showHide () {
+            if (onOFF== "hidden") {
+                onOFF = "visible";
+            }
+            else {
+                onOFF = "hidden";
+            }
             document.getElementById('vyberMoznosti').style.visibility = onOFF;
         }
 
@@ -123,20 +127,49 @@
         <div class="col-md-4">
           <h3 class="my-3">Project Description</h3>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
-          <h3 class="my-3">Project Details</h3>
-          <ul>
+         <!--  <h3 class="my-3">Vyber si farbu</h3>
+           <div class="choiceButton">
+                <p><b>Farba</b></p>
+                <button onclick=changeColor("biela")>Biela</button>
+                <button onclick=change </button>
+                <button onclick=changeColor("buk")>Buk</button>
+                <button onclick=changeColor("dub-bardolino")>Dub-Bardolino</button>
+                <button onclick=changeColor("dub-canyon")>Dub-Canyon</button>
+                <button onclick=changeColor("graphite")>Graphite</button>
+                <button onclick=changeColor("navarra")>Navarra</button>
+                <button onclick=changeColor("orech")>Orech</button>
+                <button onclick=changeColor("wenge")>Wenge</button>
+            </div> -->
+          <!-- <ul>
             <li>Lorem Ipsum</li>
             <li>Dolor Sit Amet</li>
             <li>Consectetur</li>
             <li>Adipiscing Elit</li>
-          </ul>
-          <p><button onclick="document.getElementById('myImg2').src='pic\\rea-office-20-10-wenge.jpg'">test</button></p>
+          </ul> -->
+
+
+
+
+          <p><button onclick="document.getElementById('myImg2').src='pic\\rea-office-20-10-wenge.jpg'">test wenge</button></p>
+          <p><button onclick="changeNameTest()" >test biela</button></p>
+          <p><button onclick="document.getElementById('testovacie').innerHTML='nove slovo'">zmena textu</button></p>
+          <p><button onclick="document.getElementById('myImg2').src='pic\\rea-office-20-10-dub-bardolino.jpg'"> test dub</button></p>
+          <p id="testovacie">slovo</p>
+
+
+<p id="demo"></p>
+
+<script>
+document.getElementById("demo").innerHTML = "Hello JavaScript!";
+</script> 
+
+
         </div>
 
 
         <div class="col-md-8">
           <!-- <img class="img-fluid" src="pic\\rea-office-20-20-navarra.jpg" id="myImg2"> -->
-          <img class="img-fluid" src="pic\\rea-office-20-20-navarra.jpg" id="myImg2">
+          <img class="img-fluid" src="pic\\rea-office-10-10-biela.jpg" id="myImg2">
         </div>
 
 
