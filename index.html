@@ -4,11 +4,12 @@
 <!-- 
   ZLEPSIT
 - vymenu starych obrazkov zoptimalizovat, 
-- ked klikne na obr. v historii, zameni ho za hlavny - zistit src z obrazku, ako?
+- ked klikne na obr. v historii, zameni ho za hlavny - ******    zistit src z obrazku *****
 
 
 PRIDAT
 - historia zmien, moznost vratit sa spat - ukladat do pola? 
+
  -->
 
 
@@ -26,7 +27,7 @@ PRIDAT
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/portfolio-item.css" rel="stylesheet">
+    <link href="css/mystyle.css" rel="stylesheet">
 
   </head>
 
@@ -51,6 +52,11 @@ PRIDAT
 
         function showColor() {
             document.getElementById("vyberRozmer").style.display = "none";
+            document.getElementById("vyberFarba").style.display = "block";
+        }
+
+        function showAll() {
+            document.getElementById("vyberRozmer").style.display = "block";
             document.getElementById("vyberFarba").style.display = "block";
         }
 
@@ -112,10 +118,7 @@ PRIDAT
               <a class="nav-link" onclick="showColor();" href="#">Farba</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Klucky</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Kontakt</a>
+              <a class="nav-link" onclick="showAll();" href="#">Vsetko naraz</a>
             </li>
           </ul>
         </div>
@@ -133,48 +136,29 @@ PRIDAT
       <!-- Portfolio Item Row -->
       <div class="row">
 
-        <div class="col-md-4">
+        <div class="col-md-4 vyberMenu">
 
-           <div id="vyberFarba">
+          <div id="vyberRozmer" class="vyberMenu">
+            <h3 class="my-3">Vyber si výšku</h3>
+            <button onclick="changeHeight('10')">Maly</button>
+            <button onclick="changeHeight('20')">Stredny</button>
+            <h3 class="my-3">Vyber si šírku</h3>
+            <button onclick="changeWidth('10')">Uzky</button>
+            <button onclick="changeWidth('20')">Siroky</button>
+          </div>
+
+           <div id="vyberFarba" class="vyberMenu">
                 <h3 class="my-3">Vyber si farbu</h3>
-                <button onclick="changeColor('biela')">Biela</button>
-                <button onclick="changeColor('buk')">Buk</button>
-                <button onclick="changeColor('dub-bardolino')">Dub-Bardolino</button>
-                <button onclick="changeColor('dub-canyon')">Dub-Canyon</button>
-                <button onclick="changeColor('graphite')">Graphite</button>
-                <button onclick="changeColor('navarra')">Navarra</button>
-                <button onclick="changeColor('orech')">Orech</button>
-                <button onclick="changeColor('wenge')">Wenge</button>
+                <button onclick="changeColor('biela')"><img class="imgIcon" src="pic\\icon-white.jpg"></button>
+                <button onclick="changeColor('buk')"><img src="pic\\icon-buk.jpg"></button>
+                <button onclick="changeColor('dub-bardolino')"><img src="pic\\icon-bardolino.jpg"></button>
+                <button onclick="changeColor('dub-canyon')"><img src="pic\\icon-canyon.jpg"></button>
+                <button onclick="changeColor('graphite')"><img src="pic\\icon-graphite.jpg"></button>
+                <button onclick="changeColor('navarra')"><img src="pic\\icon-navarra.jpg"></button>
+                <button onclick="changeColor('orech')"><img src="pic\\icon-orech.jpg"></button>
+                <button onclick="changeColor('wenge')"><img src="pic\\icon-wenge.jpg"></button>
             </div>
-
-            <div id="vyberRozmer">
-              <h3 class="my-3">Vyber si výšku</h3>
-              <button onclick="changeHeight('10')">Maly</button>
-              <button onclick="changeHeight('20')">Stredny</button>
-              <h3 class="my-3">Vyber si šírku</h3>
-              <button onclick="changeWidth('10')">Uzky</button>
-              <button onclick="changeWidth('20')">Siroky</button>
-            </div>
-
-
-            
-        </div>
-
-
-          <!-- <p>TESTOVACIA CAST</p>
-          <p><button onclick="document.getElementById('myImg2').src='pic\\rea-office-20-10-wenge.jpg'">test wenge</button></p>
-          <p><button onclick="changeNameTest()" >test biela</button></p>
-          <p><button onclick="document.getElementById('testovacie').innerHTML='document.getElementById('myImg2').src">zmena textu</button></p>
-          <p><button onclick="document.getElementById('myImg2').src='pic\\rea-office-20-10-dub-bardolino.jpg'"> test dub</button></p>
-          <p id="testovacie">slovo</p>
-
-<script>
-document.getElementById("demo").innerHTML = "Hello JavaScript!";
-
-</script>  -->
-
-
-
+          </div>
 
 
 <!-- HLAVNY obrazok -->
@@ -185,6 +169,8 @@ document.getElementById("demo").innerHTML = "Hello JavaScript!";
 
       </div>
       <!-- /.row -->
+      <!-- <div class="border border-warning">test</div> -->
+
 
       <!-- Related Projects Row -->
       <h3 class="my-4">Predchádzajúce výbery</h3>
@@ -225,7 +211,7 @@ document.getElementById("demo").innerHTML = "Hello JavaScript!";
     <!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
+        <p class="m-0 text-center text-white">Copyright &copy; WAAAAAUUU 2018</p>
       </div>
       <!-- /.container -->
     </footer>

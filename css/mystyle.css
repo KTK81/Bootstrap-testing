@@ -13,3 +13,22 @@ body {
     padding-top: 56px;
   }
 }
+
+span {
+	border: 3px solid red;
+	z-index: 40;
+}
+
+div.vyberMenu {
+	text-align: center;
+	border-color: "red";
+
+}
+
+img.icon {
+	display: block;
+  max-width: 10px;
+  max-height: 10px;
+  /*height: auto;*/
+
+}
