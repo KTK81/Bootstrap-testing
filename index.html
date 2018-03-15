@@ -3,7 +3,8 @@
 
 <!-- 
   ZLEPSIT
-- vymenu starych obrazkov zoptimalizovat
+- vymenu starych obrazkov zoptimalizovat, 
+- ked klikne na obr. v historii, zameni ho za hlavny - zistit src z obrazku, ako?
 
 
 PRIDAT
@@ -70,7 +71,7 @@ PRIDAT
 
         function updateImage() {
           imageSRC = pomocnyNazov + vyska + "-" + sirka + "-" + farba + ".jpg";
-            document.getElementById("myImg2").src = imageSRC;
+            document.getElementById("myImgMAIN").src = imageSRC;
             updateOldImages(imageSRC);
         }
 
@@ -178,9 +179,8 @@ document.getElementById("demo").innerHTML = "Hello JavaScript!";
 
 <!-- HLAVNY obrazok -->
         <div class="col-md-8">
-          <img class="img-fluid" src="pic\\rea-office-10-10-biela.jpg" id="myImg2">
+          <img class="img-fluid" style='left: 488px' src="pic\\rea-office-10-10-biela.jpg" id="myImgMAIN">
         </div>
-
 
 
       </div>
@@ -195,6 +195,7 @@ document.getElementById("demo").innerHTML = "Hello JavaScript!";
           <a href="#">
             <img class="img-fluid" id="IMGOld4" src="pic\\rea-office-10-10-biela.jpg" alt="">
           </a>
+          <p></p>
         </div>
 
         <div class="col-md-3 col-sm-6 mb-4">
