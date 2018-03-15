@@ -44,14 +44,13 @@ PRIDAT
 
 
         function showDimensions() {
-            document.getElementById("rozmerVyber").style.display = "block";
-            document.getElementById("farbaVyber").style.display = "none";
+            document.getElementById("vyberRozmer").style.display = "block";
+            document.getElementById("vyberFarba").style.display = "none";
         }
 
         function showColor() {
-            // updateImage();
-            document.getElementById("rozmerVyber").style.display = "none";
-            document.getElementById("farbaVyber").style.display = "block";
+            document.getElementById("vyberRozmer").style.display = "none";
+            document.getElementById("vyberFarba").style.display = "block";
         }
 
         function changeColor(color) {
@@ -75,12 +74,12 @@ PRIDAT
             updateOldImages(imageSRC);
         }
 
+//spodne obrazky, historia vyberu, nahradi src, vzdy o jedno starsi
         function updateOldImages(imageSRC) {
           imageSrcOld4 = imageSrcOld3;
           imageSrcOld3 = imageSrcOld2;
           imageSrcOld2 = imageSrcOld1;
           imageSrcOld1 = imageSRC;
-          
           document.getElementById("IMGOld1").src = imageSrcOld1;
           document.getElementById("IMGOld2").src = imageSrcOld2;
           document.getElementById("IMGOld3").src = imageSrcOld3;
@@ -103,13 +102,13 @@ PRIDAT
       <div class="container">
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Rozmery
-                <span class="sr-only">(current)</span>
+            <li class="nav-item">
+              <a class="nav-link" onclick="showDimensions();" href="#">Rozmery
+                <!-- <span class="sr-only">(current)</span> -->
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Farba</a>
+              <a class="nav-link" onclick="showColor();" href="#">Farba</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Klucky</a>
@@ -135,7 +134,7 @@ PRIDAT
 
         <div class="col-md-4">
 
-           <div id="farbaVyber">
+           <div id="vyberFarba">
                 <h3 class="my-3">Vyber si farbu</h3>
                 <button onclick="changeColor('biela')">Biela</button>
                 <button onclick="changeColor('buk')">Buk</button>
@@ -147,13 +146,10 @@ PRIDAT
                 <button onclick="changeColor('wenge')">Wenge</button>
             </div>
 
-            <div id="farbaVyber">
-                <h3 class="my-3">Vyber si výšku</h3>
-                <button onclick="changeHeight('10')">Maly</button>
-                <button onclick="changeHeight('20')">Stredny</button>
-            </div>
-
-            <div id="farbaVyber">
+            <div id="vyberRozmer">
+              <h3 class="my-3">Vyber si výšku</h3>
+              <button onclick="changeHeight('10')">Maly</button>
+              <button onclick="changeHeight('20')">Stredny</button>
               <h3 class="my-3">Vyber si šírku</h3>
               <button onclick="changeWidth('10')">Uzky</button>
               <button onclick="changeWidth('20')">Siroky</button>
