@@ -44,20 +44,26 @@ var pomocnyNazov = "pic\\rea-office-";
         function updateImage() {
           imageSRC = pomocnyNazov + vyska + "-" + sirka + "-" + farba + ".jpg";
             document.getElementById("myImgMAIN").src = imageSRC;
-            updateOldImages(imageSRC);
+//            updateOldImages(imageSRC);
         }
 
+function zmena () {
+    var divko2=document.getElementById("bttnModra");
+    divko2.innerHTML="kookok";
+    
+}
+
 //spodne obrazky, historia vyberu, nahradi src, vzdy o jedno starsi
-        function updateOldImages(imageSRC) {
-          imageSrcOld4 = imageSrcOld3;
-          imageSrcOld3 = imageSrcOld2;
-          imageSrcOld2 = imageSrcOld1;
-          imageSrcOld1 = imageSRC;
-          document.getElementById("IMGOld1").src = imageSrcOld1;
-          document.getElementById("IMGOld2").src = imageSrcOld2;
-          document.getElementById("IMGOld3").src = imageSrcOld3;
-          document.getElementById("IMGOld4").src = imageSrcOld4;
-        }
+//        function updateOldImages(imageSRC) {
+//          imageSrcOld4 = imageSrcOld3;
+//          imageSrcOld3 = imageSrcOld2;
+//          imageSrcOld2 = imageSrcOld1;
+//          imageSrcOld1 = imageSRC;
+//          document.getElementById("IMGOld1").src = imageSrcOld1;
+//          document.getElementById("IMGOld2").src = imageSrcOld2;
+//          document.getElementById("IMGOld3").src = imageSrcOld3;
+//          document.getElementById("IMGOld4").src = imageSrcOld4;
+//        }
 
 
         window.onload = function (e) {
