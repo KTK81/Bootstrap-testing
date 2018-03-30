@@ -32,15 +32,17 @@ PRIDAT
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" onclick="showDimensions();" href="#">Rozmery
+                <a class="nav-link" id ="navRozmery" href="#">Rozmery</a>
                 <!-- <span class="sr-only">(current)</span> -->
-              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" onclick="showColor();" href="#">Farba</a>
+              <a class="nav-link" id="navFarba" href="#">Farba</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" onclick="showAll();" href="#">Vsetko naraz</a>
+              <a class="nav-link" id="navAll" href="#">Vsetko naraz</a>
+            </li>
+              <li class="nav-item">
+              <a class="nav-link" id="navCan" href="#">Canvas</a>
             </li>
           </ul>
         </div>
@@ -59,33 +61,33 @@ PRIDAT
 
       <!-- Portfolio Item Row -->
         <div class="row">
-        <div class="col-md-4 vyberMenu">
+        <div class="col-md-5 vyberMenu">
 
             <div id="vyberRozmer" class="vyberMenu">
                 <h3 class="my-3">Vyber si výšku</h3>
-                <button onclick="changeHeight('10')">Maly</button>
-                <button onclick="changeHeight('20')">Stredny</button>
+                <button id="btnH10">Maly</button>
+                <button id="btnH20">Stredny</button>
                 <h3 class="my-3">Vyber si šírku</h3>
-                <button onclick="changeWidth('10')">Uzky</button>
-                <button onclick="changeWidth('20')">Siroky</button>
+                <button id="btnW10">Uzky</button>
+                <button id="btnW20">Siroky</button>
             </div>
 
             <div id="vyberFarba" class="vyberMenu">
                 <h3 class="my-3">Vyber si farbu</h3>
-                <button onclick="changeColor('biela')"><img class="imgIcon" src="pic\\icon-white.jpg"></button>
-                <button onclick="changeColor('buk')"><img src="pic\\icon-buk.jpg"></button>
-                <button onclick="changeColor('dub-bardolino')"><img src="pic\\icon-bardolino.jpg"></button>
-                <button onclick="changeColor('dub-canyon')"><img src="pic\\icon-canyon.jpg"></button>
-                <button onclick="changeColor('graphite')"><img src="pic\\icon-graphite.jpg"></button>
-                <button onclick="changeColor('navarra')"><img src="pic\\icon-navarra.jpg"></button>
-                <button onclick="changeColor('orech')"><img src="pic\\icon-orech.jpg"></button>
-                <button onclick="changeColor('wenge')"><img src="pic\\icon-wenge.jpg"></button>
+                <button id="btnColorBiela"><img class="imgIcon" src="pic\\icon-white.jpg"></button>
+                <button id="btnColorBuk"><img src="pic\\icon-buk.jpg"></button>
+                <button id="btnColorBardolino" ><img src="pic\\icon-bardolino.jpg"></button>
+                <button id="btnColorCanyon"><img src="pic\\icon-canyon.jpg"></button>
+                <button id="btnColorGraphite" ><img src="pic\\icon-graphite.jpg"></button>
+                <button id="btnColorNabarra"><img src="pic\\icon-navarra.jpg"></button>
+                <button id="btnColorOrech"><img src="pic\\icon-orech.jpg"></button>
+                <button id="btnColorWenge"><img src="pic\\icon-wenge.jpg"></button>
             </div>
           </div>
 
 
 <!-- HLAVNY obrazok -->
-        <div class="col-md-8">
+        <div class="col-md-7">
           <img class="img-fluid" style='left: 488px' src="pic\\rea-office-10-10-biela.jpg" id="myImgMAIN">
         </div>
 
