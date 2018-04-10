@@ -1,9 +1,15 @@
-// zakladne vseobecne premenne
-var pomocnyNazov = "pic\\korpus-";
-var vyska = "v10";
-var sirka = "s10";
-var farba = "biela";
-//var onOFF = "hidden";
+var korpus = {
+    pomocnyNazov:"pic\\korpus-",
+    zaradenie:"NS2",
+    farba:"biela",
+    vyska:"v20",
+    sirka:"s20",
+    hlbka:"h20",
+    obrSubor: function() {
+        return this.pomocnyNazov + this.vyska + "-" + this.sirka + "-" + this.farba + ".jpg";
+    }
+};
+
 var imageSrcOld1 = "pic\\rea-office-10-10-biela.jpg";
 var imageSrcOld2 = "pic\\rea-office-10-10-biela.jpg";
 var imageSrcOld3 = "pic\\rea-office-10-10-biela.jpg";
@@ -12,10 +18,9 @@ var image = new Image ();
 var canvas = document.getElementById("mainPicture");
 var ctx = canvas.getContext('2d');
 
-
 window.onload = function (e) {
     showChoice("block", "none", "none", "none")
-    updateImgSrc();
+    changeInfo("vyska","v20");
 }
 
 //***** horne hlavne menu **** MENU + funkcie na zobrazenie len vybranych <div> elementov
@@ -31,7 +36,6 @@ menuCan.addEventListener("click", function() { showChoice("none", "none", "block
 menuTEST.addEventListener("click", function() { showChoice("none", "none", "none", "block")});
 menuAll.addEventListener("click", function() { showChoice("block", "block", "none", "none")});
 
-
 function showChoice (rozmer, farba, predok, TEST) {
     document.getElementById("vyberRozmer").style.display = rozmer;
     document.getElementById("vyberFarba").style.display = farba;
@@ -39,60 +43,11 @@ function showChoice (rozmer, farba, predok, TEST) {
     document.getElementById("vyberTEST").style.display = TEST;
 }
 
-// ***** ROZMERY *****
-var btnHeight10 = document.getElementById("btnH10");
-var btnHeight20 = document.getElementById("btnH20");
-var btnWidth10 = document.getElementById("btnW10");
-var btnWidth20 = document.getElementById("btnW20");
-
-btnHeight10.addEventListener("click", function () {changeHeight("v10")} );
-btnHeight20.addEventListener("click", function () {changeHeight("v20")} );
-//btnWidth10.addEventListener("click", function() {changeWidth("s10")});
-//btnWidth20.addEventListener("click", function() {changeWidth("s20")});
-
-//function changeWidth(width) {
-//    sirka = width;
-//    updateImgSrc();
-//}
-
-function changeHeight(height) {
-    vyska = height;
-    updateImgSrc();
-}
-
-// ***** FARBY *****
-var btnBiela = document.getElementById("btnColorBiela");
-var btnBuk = document.getElementById("btnColorBuk");
-var btnBardolino = document.getElementById("btnColorBardolino");
-var btnCanyon = document.getElementById("btnColorCanyon");
-var btnGraphite = document.getElementById("btnColorGraphite");
-var btnNavarra = document.getElementById("btnColorNabarra");
-var btnOrech = document.getElementById("btnColorOrech");
-var btnWenge = document.getElementById("btnColorWenge");
-
-btnBiela.addEventListener("click", function() {changeColor("biela")});
-btnBuk.addEventListener("click", function() {changeColor("buk")});
-btnBardolino.addEventListener("click", function() {changeColor("dub-bardolino")});
-btnCanyon.addEventListener("click", function() {changeColor("dub-canyon")});
-btnGraphite.addEventListener("click", function() {changeColor("graphite")});
-btnNavarra.addEventListener("click", function() {changeColor("navarra")});
-btnOrech.addEventListener("click", function() {changeColor("orech")});
-btnWenge.addEventListener("click", function() {changeColor("wenge")});
-btnBiela.addEventListener("click", function() {changeColor("biela")});
-btnBiela.addEventListener("click", function() {changeColor("biela")});
-
-function changeColor(color) {
-    farba = color;
-    updateImgSrc();
-}
-
-// hlavna funkcia, ktora meni zobrazeny obrazok 
-//image.src = "4farby.jpg";
-//var imageTemp = document.getElementById("imageTest");
-//var imageSRC = "pic\\rea-office-10-10-biela.jpg";
-
-function updateImgSrc() {
-    image.src = pomocnyNazov + vyska + "-" + sirka + "-" + farba + ".jpg";
+// ************************** hlavna funkcia, ktora meni zobrazeny obrazok  ***************************
+//zmeni dany parameter v objecte, nacita z objectu novu verziu suboru k obrazku, prisposobi canvas obrazku, zobrazi novy obrazok
+function changeInfo(vlastnost, hodnota) {
+    korpus[vlastnost]=hodnota;
+    image.src = korpus.obrSubor();
     canvas.width=image.width;
     canvas.height=image.height;
     textName.innerText=image.src;
@@ -101,6 +56,30 @@ function updateImgSrc() {
     }
     //            updateOldImages(imageSRC);
 }
+
+// *        **** ROZMERY *****
+var btnHeight10 = document.getElementById("btnH10");
+var btnHeight20 = document.getElementById("btnH20");
+var btnWidth10 = document.getElementById("btnW10");
+var btnWidth20 = document.getElementById("btnW20");
+
+btnHeight10.addEventListener("click", function() {changeInfo("vyska","v20")});
+btnHeight20.addEventListener("click", function() {changeInfo("vyska","v30")});
+//btnWidth10.addEventListener("click", function() {changeInfo("sirka","s20")});
+//btnWidth20.addEventListener("click", function() {changeInfo("sirka","s30")});
+
+//       ***** FARBY *****
+var btnBiela = document.getElementById("btnColorBiela");
+var btnBuk = document.getElementById("btnColorBuk");
+var btnDub = document.getElementById("btnColorDub");
+var btnNavarra = document.getElementById("btnColorNabarra");
+var btnWenge = document.getElementById("btnColorWenge");
+
+btnBiela.addEventListener("click", function() {changeInfo("farba","biela")});
+btnBuk.addEventListener("click", function() {changeInfo("farba","buk")});
+btnDub.addEventListener("click", function() {changeInfo("farba","dub")});
+btnNavarra.addEventListener("click", function() {changeInfo("farba","navarra")});
+btnWenge.addEventListener("click", function() {changeInfo("farba","wenge")});
 
 
 //    **************** CANVAS ****************
