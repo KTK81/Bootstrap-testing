@@ -1,47 +1,43 @@
-window.onload = function (e) {
-    showDimensions();
-    updateImage();
-}
+// zakladne vseobecne premenne
+var pomocnyNazov = "pic\\korpus-";
+var vyska = "v10";
+var sirka = "s10";
+var farba = "biela";
+//var onOFF = "hidden";
+var imageSrcOld1 = "pic\\rea-office-10-10-biela.jpg";
+var imageSrcOld2 = "pic\\rea-office-10-10-biela.jpg";
+var imageSrcOld3 = "pic\\rea-office-10-10-biela.jpg";
+var imageSrcOld4 = "pic\\rea-office-10-10-biela.jpg";
+var image = new Image ();
+var canvas = document.getElementById("mainPicture");
+var ctx = canvas.getContext('2d');
 
+
+window.onload = function (e) {
+    showChoice("block", "none", "none", "none")
+    updateImgSrc();
+}
 
 //***** horne hlavne menu **** MENU + funkcie na zobrazenie len vybranych <div> elementov
 var menuRozmery = document.getElementById("navRozmery");
 var menuFarba = document.getElementById("navFarba");
 var menuAll = document.getElementById("navAll");
 var menuCan = document.getElementById("navCan");
+var menuTEST = document.getElementById("navTEST");
 
-menuRozmery.addEventListener("click", showDimensions);
-menuFarba.addEventListener("click", showColor);
-menuAll.addEventListener("click",showAll);
-menuCan.addEventListener("click", showAll);
+menuRozmery.addEventListener("click", function() { showChoice("block", "none", "none", "none")});
+menuFarba.addEventListener("click", function() { showChoice("none", "block", "none", "none")});
+menuCan.addEventListener("click", function() { showChoice("none", "none", "block", "none")});
+menuTEST.addEventListener("click", function() { showChoice("none", "none", "none", "block")});
+menuAll.addEventListener("click", function() { showChoice("block", "block", "none", "none")});
 
-function showDimensions() {
-    document.getElementById("vyberRozmer").style.display = "block";
-    document.getElementById("vyberFarba").style.display = "none";
+
+function showChoice (rozmer, farba, predok, TEST) {
+    document.getElementById("vyberRozmer").style.display = rozmer;
+    document.getElementById("vyberFarba").style.display = farba;
+    document.getElementById("vyberPredok").style.display = predok;
+    document.getElementById("vyberTEST").style.display = TEST;
 }
-
-function showColor() {
-    document.getElementById("vyberRozmer").style.display = "none";
-    document.getElementById("vyberFarba").style.display = "block";
-}
-
-function showAll() {
-    document.getElementById("vyberRozmer").style.display = "block";
-    document.getElementById("vyberFarba").style.display = "block";
-}
-
-
-// zakladne vseobecne premenne
-var pomocnyNazov = "pic\\rea-office-";
-var vyska = "10";
-var sirka = "10";
-var farba = "biela";
-var onOFF = "hidden";
-var imageSRC = "pic\\rea-office-10-10-biela.jpg";
-var imageSrcOld1 = "pic\\rea-office-10-10-biela.jpg";
-var imageSrcOld2 = "pic\\rea-office-10-10-biela.jpg";
-var imageSrcOld3 = "pic\\rea-office-10-10-biela.jpg";
-var imageSrcOld4 = "pic\\rea-office-10-10-biela.jpg";
 
 // ***** ROZMERY *****
 var btnHeight10 = document.getElementById("btnH10");
@@ -49,19 +45,19 @@ var btnHeight20 = document.getElementById("btnH20");
 var btnWidth10 = document.getElementById("btnW10");
 var btnWidth20 = document.getElementById("btnW20");
 
-btnHeight10.addEventListener("click", function () {changeHeight("10")} );
-btnHeight20.addEventListener("click", function () {changeHeight("20")} );
-btnWidth10.addEventListener("click", function() {changeWidth("10")});
-btnWidth20.addEventListener("click", function() {changeWidth("20")});
+btnHeight10.addEventListener("click", function () {changeHeight("v10")} );
+btnHeight20.addEventListener("click", function () {changeHeight("v20")} );
+//btnWidth10.addEventListener("click", function() {changeWidth("s10")});
+//btnWidth20.addEventListener("click", function() {changeWidth("s20")});
 
-function changeWidth(width) {
-    sirka = width;
-    updateImage();
-}
+//function changeWidth(width) {
+//    sirka = width;
+//    updateImgSrc();
+//}
 
 function changeHeight(height) {
     vyska = height;
-    updateImage();
+    updateImgSrc();
 }
 
 // ***** FARBY *****
@@ -87,15 +83,101 @@ btnBiela.addEventListener("click", function() {changeColor("biela")});
 
 function changeColor(color) {
     farba = color;
-    updateImage();
+    updateImgSrc();
 }
 
 // hlavna funkcia, ktora meni zobrazeny obrazok 
-function updateImage() {
-    imageSRC = pomocnyNazov + vyska + "-" + sirka + "-" + farba + ".jpg";
-    document.getElementById("myImgMAIN").src = imageSRC;
-//            updateOldImages(imageSRC);
-        }
+//image.src = "4farby.jpg";
+//var imageTemp = document.getElementById("imageTest");
+//var imageSRC = "pic\\rea-office-10-10-biela.jpg";
+
+function updateImgSrc() {
+    image.src = pomocnyNazov + vyska + "-" + sirka + "-" + farba + ".jpg";
+    canvas.width=image.width;
+    canvas.height=image.height;
+    textName.innerText=image.src;
+    image.onload = function() {
+        ctx.drawImage(image, 0, 0);
+    }
+    //            updateOldImages(imageSRC);
+}
+
+
+//    **************** CANVAS ****************
+//var suflikMaly = document.getElementById("btnSuf10");
+//suflikMaly.addEventListener("click", addSuflik);
+//
+//function addSuflik () {
+////    textName.innerText="CANVAAAAS";
+//    var canvas1 = document.getElementById("canvasSecond");
+//    var ctx2 = canvas1.getContext("2d");
+//    var imageNew = new Image ();
+//    imageNew.src = "4farby.jpg";
+//    imageNew.onload = function() {
+//        ctx.drawImage(imageNew, canvas.width/2-150, canvas.height/2+50, 200, 200);    
+//    }
+//    
+//}
+
+var btnImgUpload = document.getElementById("imgUpload");
+btnImgUpload.addEventListener("click", uploadCanvasSecond);
+
+function uploadCanvasSecond () {
+    var canvasSecond = document.getElementById("canvasSecond");
+    var ctxSecond = canvasSecond.getContext("2d");
+    var imageKorpus = new Image ();
+    imageKorpus.src = "pic\\4farby.jpg";
+    var imageSuflik = new Image ();
+    imageSuflik.src = "pic\\suflik1.jpg";  
+    canvasSecond.width=imageKorpus.width;
+    canvasSecond.height=imageKorpus.height;
+
+    ctxSecond.canvas.addEventListener('mousemove', function(event){
+        var mouseX = event.clientX - ctxSecond.canvas.offsetLeft;
+        var mouseY = event.clientY - ctxSecond.canvas.offsetTop;
+        var status = document.getElementById('status');
+        status.innerHTML = mouseX+" | "+mouseY;
+    });
+    ctxSecond.canvas.addEventListener('click', function(event){
+        var mouseX = event.clientX - ctxSecond.canvas.offsetLeft;
+        var mouseY = event.clientY - ctxSecond.canvas.offsetTop;
+//         alert(mouseX+" | "+mouseY);
+        ctx.fillStyle = "orange";
+        ctx.fillRect(mouseX-15, mouseY-15, 30, 30);
+    });
+
+    imageKorpus.onload = function() {
+        ctxSecond.drawImage(imageKorpus, 0, 0, canvasSecond.width/2, canvasSecond.height/2);    
+        ctxSecond.drawImage(imageSuflik, canvasSecond.width/2, canvasSecond.height/2, canvasSecond.width-1, canvasSecond.height-1);    
+    }
+    
+}
+
+//*************************************************************************************
+var btnTEST = document.getElementById("spustiTEST");
+btnTEST.addEventListener("click", initCanvas);
+function initCanvas(){
+    var ctx = document.getElementById('canvasTest').getContext('2d');
+    ctx.canvas.addEventListener('mousemove', function(event){
+        var mouseX = event.clientX - ctx.canvas.offsetLeft;
+        var mouseY = event.clientY - ctx.canvas.offsetTop;
+        var status = document.getElementById('statusTest');
+        status.innerHTML = mouseX+" | "+mouseY;
+    });
+    ctx.canvas.addEventListener('click', function(event){
+        var mouseX = event.clientX - ctx.canvas.offsetLeft;
+        var mouseY = event.clientY - ctx.canvas.offsetTop;
+        // alert(mouseX+" | "+mouseY);
+        ctx.fillStyle = "orange";
+        ctx.fillRect(mouseX-15, mouseY-15, 30, 30);
+    });
+}
+
+
+
+
+
+
 
 //spodne obrazky, historia vyberu, nahradi src, vzdy o jedno starsi
 //        function updateOldImages(imageSRC) {

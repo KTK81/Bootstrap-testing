@@ -8,35 +8,61 @@ body {
   padding-top: 54px;
 }
 
-@media (min-width: 992px) {
-  body {
-    padding-top: 56px;
-  }
-}
-
 span {
-	border: 3px solid red;
+/*	border: 3px solid red;*/
 	z-index: 40;
 }
 
 div.vyberMenu {
 	text-align: center;
-	border-color: "red";
+/*    border: 1px solid red;*/
+}
+
+div.hlavnyObrazok {
+    border: 3px solid blue;
+}
+
+#mainPicture {
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+}
+
+#canvasSecond {
+    width: 100%;
+    height: auto;
+    border: 1px solid green;
+}
+
+#canvasTest{ 
+    background:#FFF; 
+    border:#000 1px solid; 
+}
+
+
+img.icon {
+    display: block;
+    max-width: 10px;
+    max-height: 10px;
+  /*height: auto;*/
 
 }
 
+
+/*
+@media (min-width: 992px) {
+  body {
+    padding-top: 56px;
+  }
+}
+*/
+
+/*
 div.pokusnyDIV {
     width: 200px;
     height: 200px;
     border: 1px solid black;
     background-color: antiquewhite;
-/*    color: */
+    color: 
 }
-
-img.icon {
-	display: block;
-  max-width: 10px;
-  max-height: 10px;
-  /*height: auto;*/
-
-}
+*/

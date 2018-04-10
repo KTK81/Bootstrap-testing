@@ -2,9 +2,9 @@
 <html lang="en">
 
 <!-- 
-  ZLEPSIT
-- vymenu starych obrazkov zoptimalizovat, 
-- ked klikne na obr. v historii, zameni ho za hlavny - ******    zistit src z obrazku *****
+???????
+- div s obrazkom - preco je text pod nim, ked je v ramci <div> ???  </div>? vid border
+- nenacita na prvy klik biele obrazky, az na druhy a len biele - dokonca je aj canvas mensi, ked nacita obrazok, ale len tie najmensie regale
 
 
 PRIDAT
@@ -39,11 +39,16 @@ PRIDAT
               <a class="nav-link" id="navFarba" href="#">Farba</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="navAll" href="#">Vsetko naraz</a>
-            </li>
-              <li class="nav-item">
               <a class="nav-link" id="navCan" href="#">Canvas</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" id="navTEST" href="#">TEST</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="navAll" href="#">Vsetko naraz</a>
+            </li>
+
+
           </ul>
         </div>
       </div>
@@ -83,12 +88,30 @@ PRIDAT
                 <button id="btnColorOrech"><img src="pic\\icon-orech.jpg"></button>
                 <button id="btnColorWenge"><img src="pic\\icon-wenge.jpg"></button>
             </div>
+            
+            <div id="vyberPredok" class="vyberMenu">
+                <h3 class="my-3">Vyber si šuflík</h3>
+                <button id="imgUpload">Nahraj obrazok</button>
+                <button id="btnDvie10">Dvierka</button><br>
+                <canvas id="canvasSecond"></canvas>
+                <h2 id="status">text</h2>
+            </div>
+            
+            <div id="vyberTEST" class="vyberMenu">
+                <canvas id="canvasTest" width="800" height="300"></canvas>
+                <h2 id="statusTest">0 | 0</h2>
+                <button id="spustiTEST">TEST</button>;
+            </div>
           </div>
 
 
 <!-- HLAVNY obrazok -->
-        <div class="col-md-7">
-          <img class="img-fluid" style='left: 488px' src="pic\\rea-office-10-10-biela.jpg" id="myImgMAIN">
+        <div class="col-md-7 hlavnyObrazok">
+            <canvas id="mainPicture"></canvas>
+            <p id="textName">text</p>
+            
+            
+<!--          <img class="img-fluid" style='left: 488px' src="pic\\rea-office-10-10-biela.jpg" id="myImgMAIN">-->
         </div>
 
 
