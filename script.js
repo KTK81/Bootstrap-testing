@@ -114,7 +114,7 @@ btnSufDOWN.addEventListener("click",function() {drawCanvas()});
 function drawCanvas() {
     var picture = new Image();
     picture.src = "pic\\suflik-8-1.png";
-    ctx.drawImage(picture, 100, 200);
+    ctx.drawImage(picture, 80, 140);
 //        ctx.drawImage(picture, 203, 265, 350, 160);
 }
 
