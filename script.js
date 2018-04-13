@@ -18,21 +18,23 @@ var predok = {
     suflik1Yend:380
 }
 
-
-
 window.onload = function (e) {
     showChoice("block", "block", "none", "none")
     changeInfo("vyska","v20");
 }
 
 //***** horne hlavne menu **** MENU + funkcie na zobrazenie len vybranych <div> elementov
+var menuRozmery = document.getElementById("navRozmery");
+var menuFarba = document.getElementById("navFarba");
+var menuSuflik = document.getElementById("navSuflik");
+var menuCoords = document.getElementById("navCoords");
 var menuAll = document.getElementById("navAll");
-var menuCan = document.getElementById("navCan");
-var menuTEST = document.getElementById("navTEST");
 
-menuCan.addEventListener("click", function() { showChoice("none", "none", "block", "none")});
-menuTEST.addEventListener("click", function() { showChoice("none", "none", "none", "block")});
-menuTEST.addEventListener("click", zistiCoords);
+
+menuRozmery.addEventListener("click", function() { showChoice("block", "none", "none", "none")});
+menuFarba.addEventListener("click", function() { showChoice("none", "block", "none", "none")});
+menuSuflik.addEventListener("click", function() { showChoice("none", "none", "block", "none")}); 
+menuCoords.addEventListener("click", zistiCoords);
 menuAll.addEventListener("click", function() { showChoice("block", "block", "none", "none")});
 
 function showChoice (rozmer, farba, predok, TEST) {
@@ -78,6 +80,7 @@ function changeInfo(vlastnost, hodnota) {
 }
 
 function zistiCoords(){
+    showChoice("none", "none", "none", "block");
     ctx.canvas.addEventListener('mousemove', function(event){
         var mouseX = event.layerX;
         var mouseY = event.layerY;
