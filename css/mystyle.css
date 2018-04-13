@@ -4,10 +4,6 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-portfolio-item/blob/master/LICENSE)
  */
 
-body {
-  padding-top: 54px;
-}
-
 span {
 /*	border: 3px solid red;*/
 	z-index: 40;
@@ -28,6 +24,7 @@ div.hlavnyObrazok {
     border: 1px solid black;
 }
 
+/*
 #canvasSecond {
     width: 100%;
     height: auto;
@@ -38,6 +35,7 @@ div.hlavnyObrazok {
     background:#FFF; 
     border:#000 1px solid; 
 }
+*/
 
 
 img.icon {
