@@ -10,13 +10,15 @@ var korpus = {
     }
 };
 
-var predok = {
-    suflik1:false,
-    suflik1Xstart:780,
-    suflik1Ystart:180,
-    suflik1Xend:1180,
-    suflik1Yend:380
-}
+var koordinaty = [
+    {zaradenie:"v20", show:false, pozicia:"1", startX:"130", startY:"160", endX:"588", endY:"368"},
+    {zaradenie:"v20", show:false, pozicia:"2", startX:"130", startY:"370", endX:"588", endY:"583"},
+    {zaradenie:"v30", show:false, pozicia:"1", startX:"124", startY:"54", endX:"583", endY:"263"},
+    {zaradenie:"v30", show:false, pozicia:"2", startX:"124", startY:"265", endX:"583", endY:"475"},
+    {zaradenie:"v30", show:false, pozicia:"3", startX:"124", startY:"478", endX:"583", endY:"691"},
+];
+
+
 
 window.onload = function (e) {
     showChoice("block", "block", "none", "none")
@@ -71,8 +73,10 @@ var ctx = canvas.getContext('2d');
 function changeInfo(vlastnost, hodnota) {
     korpus[vlastnost]=hodnota;
     image.src = korpus.obrSubor();
-    canvas.width=image.width;
-    canvas.height=image.height;
+    canvas.width=image.naturalWidth;
+    canvas.height=image.naturalHeight;
+//    canvas.width=image.width;
+//    canvas.height=image.height;
     textName.innerText=image.src;
     image.onload = function() {
         ctx.drawImage(image, 0, 0);
@@ -95,26 +99,45 @@ function zistiCoords(){
         statusLayerOff.innerHTML = "offset layer "+mouseXOffset+" | "+mouseYOffset;
         statusClientOff.innerHTML = "offset client "+mouseXClientOffset+" | "+mouseYClientOffset;
     });
-    ctx.canvas.addEventListener('click', function(event){
-        var mouseX = event.layerX;
-        var mouseY = event.layerY;
-        clickKoordinaty.innerHTML = "event.layerX/Y  "+ mouseX+" | "+mouseY;
+//    ctx.canvas.addEventListener('click', function(event){
+//        var mouseX = event.layerX;
+//        var mouseY = event.layerY;
+//        clickKoordinaty.innerHTML = "event.layerX/Y  "+ mouseX+" | "+mouseY;
+//    });
+        ctx.canvas.addEventListener('click', function(event){
+            function search(nameKey, nameKey2, myArray) {
+                for (var i=0; i<myArray.length; i++) {
+                    if ((myArray[i].zaradenie===nameKey)&&(myArray[i].pozicia===nameKey2)) {
+                        return myArray[i];
+                    }
+                }
+            }
+            var test = search("v20", "1", koordinaty);
+            clickKoordinaty.innerHTML = test.startY;
     });
+    
 }
 
 
 // *****************   PREDOK  / SUFLIK / HLAVNY PROBLEM********************
 // 1. uloha : nakreslit horny suflik v hornej casti, dolny v dolnej casti. 
 // 2. uloha : nakreslit ho tam pri roznych rozliseniach, responsive ready
-var btnSufUP = document.getElementById("sufUP");
-btnSufUP.addEventListener("click",function() {drawCanvas()});
-var btnSufDOWN = document.getElementById("sufDOWN");
-btnSufDOWN.addEventListener("click",function() {drawCanvas()});
+var btnSuf3 = document.getElementById("suf3");
+btnSuf3.addEventListener("click",function() {drawCanvas(3, 124, 54)});
+var btnSuf2 = document.getElementById("suf2");
+btnSuf2.addEventListener("click",function() {drawCanvas(2, 124, 265)});
+var btnSuf1 = document.getElementById("suf1");
+btnSuf1.addEventListener("click",function() {drawCanvas(1, 124, 478)});
+//var btnSufB = document.getElementById("sufB");
+//btnSufB.addEventListener("click",function() {drawCanvas(130, 160)});
+//var btnSufA = document.getElementById("sufA");
+//btnSufA.addEventListener("click",function() {drawCanvas(130, 370)});
 
-function drawCanvas() {
+function drawCanvas(pozicia, startX, startY) {
     var picture = new Image();
     picture.src = "pic\\suflik-8-1.png";
-    ctx.drawImage(picture, 80, 140);
+    
+    ctx.drawImage(picture, startX, startY);
 //        ctx.drawImage(picture, 203, 265, 350, 160);
 }
 
