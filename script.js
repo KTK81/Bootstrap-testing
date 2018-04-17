@@ -11,13 +11,12 @@ var korpus = {
 };
 
 var koordinaty = [
-    {zaradenie:"v20", show:false, pozicia:"1", startX:"130", startY:"160", endX:"588", endY:"368"},
-    {zaradenie:"v20", show:false, pozicia:"2", startX:"130", startY:"370", endX:"588", endY:"583"},
-    {zaradenie:"v30", show:false, pozicia:"1", startX:"124", startY:"54", endX:"583", endY:"263"},
-    {zaradenie:"v30", show:false, pozicia:"2", startX:"124", startY:"265", endX:"583", endY:"475"},
-    {zaradenie:"v30", show:false, pozicia:"3", startX:"124", startY:"478", endX:"583", endY:"691"},
+    {zaradenie:"v20", pozicia:2, startX:"130", startY:"160", endX:"588", endY:"368", farba:"biela", zobraz:false},
+    {zaradenie:"v20", pozicia:1, startX:"130", startY:"370", endX:"588", endY:"583", farba:"biela", zobraz:false},
+    {zaradenie:"v30", pozicia:3, startX:"124", startY:"54", endX:"583", endY:"263", farba:"biela", zobraz:true},
+    {zaradenie:"v30", pozicia:2, startX:"124", startY:"265", endX:"583", endY:"475", farba:"biela", zobraz:true},
+    {zaradenie:"v30", pozicia:1, startX:"124", startY:"478", endX:"583", endY:"691", farba:"biela", zobraz:true},
 ];
-
 
 
 window.onload = function (e) {
@@ -105,14 +104,14 @@ function zistiCoords(){
 //        clickKoordinaty.innerHTML = "event.layerX/Y  "+ mouseX+" | "+mouseY;
 //    });
         ctx.canvas.addEventListener('click', function(event){
-            function search(nameKey, nameKey2, myArray) {
-                for (var i=0; i<myArray.length; i++) {
-                    if ((myArray[i].zaradenie===nameKey)&&(myArray[i].pozicia===nameKey2)) {
-                        return myArray[i];
+            function search(nameKey, nameKey2) {
+                for (var i=0; i<koordinaty.length; i++) {
+                    if ((koordinaty[i].zaradenie===nameKey)&&(koordinaty[i].pozicia===nameKey2)) {
+                        return koordinaty[i];
                     }
                 }
             }
-            var test = search("v20", "1", koordinaty);
+            var test = search("v20", "1");
             clickKoordinaty.innerHTML = test.startY;
     });
     
@@ -120,8 +119,6 @@ function zistiCoords(){
 
 
 // *****************   PREDOK  / SUFLIK / HLAVNY PROBLEM********************
-// 1. uloha : nakreslit horny suflik v hornej casti, dolny v dolnej casti. 
-// 2. uloha : nakreslit ho tam pri roznych rozliseniach, responsive ready
 var btnSuf3 = document.getElementById("suf3");
 btnSuf3.addEventListener("click",function() {drawCanvas(3, 124, 54)});
 var btnSuf2 = document.getElementById("suf2");
@@ -130,15 +127,35 @@ var btnSuf1 = document.getElementById("suf1");
 btnSuf1.addEventListener("click",function() {drawCanvas(1, 124, 478)});
 //var btnSufB = document.getElementById("sufB");
 //btnSufB.addEventListener("click",function() {drawCanvas(130, 160)});
-//var btnSufA = document.getElementById("sufA");
-//btnSufA.addEventListener("click",function() {drawCanvas(130, 370)});
+var btnSufA = document.getElementById("sufA");
+btnSufA.addEventListener("click",drawPredok);
 
 function drawCanvas(pozicia, startX, startY) {
     var picture = new Image();
-    picture.src = "pic\\suflik-8-1.png";
+    picture.src = "pic\\suflik-1-biela.png";
     
     ctx.drawImage(picture, startX, startY);
 //        ctx.drawImage(picture, 203, 265, 350, 160);
+}
+
+function drawPredok() {
+    var vyska = korpus.vyska;
+//    var pictureTest = new Image();
+//    pictureTest.src = "pic\\suflik-1-biela.png";
+//    ctx.drawImage(pictureTest, 124, 265);
+    var picture = new Image();
+    picture.src = "pic\\suflik-1-cervena.png";
+    
+    for (var i=0; i<koordinaty.length; i++) {
+        if ((koordinaty[i].zaradenie===vyska)&&(koordinaty[i].zobraz===true)) {
+            for (var j=1; j<4; j++) {
+                if (koordinaty[i].pozicia===j) {
+                    ctx.drawImage(picture, koordinaty[i].startX, koordinaty[i].startY);
+                    
+                }
+            }
+        }
+    }
 }
 
 
