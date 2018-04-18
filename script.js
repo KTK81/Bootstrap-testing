@@ -1,3 +1,8 @@
+//1. nacitanie obrazku korpusu na zaciatku - window.onload
+//2. pri rozmych farbach suflikov nacita len niektore
+//3. pozicia canvasu / nahrada canvasu - problem s position absolute / relative / koordinatmi
+//5.  nacitanie suflikov na 1. click -  picture.onload = function() 
+
 var korpus = {
     pomocnyNazov:"pic\\korpus-",
     zaradenie:"NS2",
@@ -11,16 +16,16 @@ var korpus = {
 };
 
 var koordinaty = [
-    {zaradenie:"v20", pozicia:2, startX:"130", startY:"160", endX:"588", endY:"368", farba:"biela", zobraz:false},
-    {zaradenie:"v20", pozicia:1, startX:"130", startY:"370", endX:"588", endY:"583", farba:"biela", zobraz:false},
-    {zaradenie:"v30", pozicia:3, startX:"124", startY:"54", endX:"583", endY:"263", farba:"biela", zobraz:true},
-    {zaradenie:"v30", pozicia:2, startX:"124", startY:"265", endX:"583", endY:"475", farba:"biela", zobraz:true},
-    {zaradenie:"v30", pozicia:1, startX:"124", startY:"478", endX:"583", endY:"691", farba:"biela", zobraz:true},
+    {zaradenie:"v20", pozicia:2, startX:"130", startY:"160", endX:"588", endY:"368", farba:"siva", zobraz:true},
+    {zaradenie:"v20", pozicia:1, startX:"130", startY:"370", endX:"588", endY:"583", farba:"siva", zobraz:true},
+    {zaradenie:"v30", pozicia:3, startX:"124", startY:"54", endX:"583", endY:"263", farba:"cervena", zobraz:true},
+    {zaradenie:"v30", pozicia:2, startX:"124", startY:"265", endX:"583", endY:"475", farba:"cervena", zobraz:true},
+    {zaradenie:"v30", pozicia:1, startX:"124", startY:"478", endX:"583", endY:"691", farba:"cervena", zobraz:true},
 ];
 
 
 window.onload = function (e) {
-    showChoice("block", "block", "none", "none")
+    showChoice("block", "block", "block", "none")
     changeInfo("vyska","v20");
 }
 
@@ -36,7 +41,7 @@ menuRozmery.addEventListener("click", function() { showChoice("block", "none", "
 menuFarba.addEventListener("click", function() { showChoice("none", "block", "none", "none")});
 menuSuflik.addEventListener("click", function() { showChoice("none", "none", "block", "none")}); 
 menuCoords.addEventListener("click", zistiCoords);
-menuAll.addEventListener("click", function() { showChoice("block", "block", "none", "none")});
+menuAll.addEventListener("click", function() { showChoice("block", "block", "block", "none")});
 
 function showChoice (rozmer, farba, predok, TEST) {
     document.getElementById("vyberRozmer").style.display = rozmer;
@@ -98,22 +103,22 @@ function zistiCoords(){
         statusLayerOff.innerHTML = "offset layer "+mouseXOffset+" | "+mouseYOffset;
         statusClientOff.innerHTML = "offset client "+mouseXClientOffset+" | "+mouseYClientOffset;
     });
-//    ctx.canvas.addEventListener('click', function(event){
-//        var mouseX = event.layerX;
-//        var mouseY = event.layerY;
-//        clickKoordinaty.innerHTML = "event.layerX/Y  "+ mouseX+" | "+mouseY;
-//    });
-        ctx.canvas.addEventListener('click', function(event){
-            function search(nameKey, nameKey2) {
-                for (var i=0; i<koordinaty.length; i++) {
-                    if ((koordinaty[i].zaradenie===nameKey)&&(koordinaty[i].pozicia===nameKey2)) {
-                        return koordinaty[i];
-                    }
-                }
-            }
-            var test = search("v20", "1");
-            clickKoordinaty.innerHTML = test.startY;
+    ctx.canvas.addEventListener('click', function(event){
+        var mouseX = event.layerX;
+        var mouseY = event.layerY;
+        clickKoordinaty.innerHTML = "event.layerX/Y  "+ mouseX+" | "+mouseY;
     });
+//        ctx.canvas.addEventListener('click', function(event){
+//            function search(nameKey, nameKey2) {
+//                for (var i=0; i<koordinaty.length; i++) {
+//                    if ((koordinaty[i].zaradenie===nameKey)&&(koordinaty[i].pozicia===nameKey2)) {
+//                        return koordinaty[i];
+//                    }
+//                }
+//            }
+//            var test = search("v20", "1");
+//            clickKoordinaty.innerHTML = test.startY;
+//    });
     
 }
 
@@ -133,25 +138,27 @@ btnSufA.addEventListener("click",drawPredok);
 function drawCanvas(pozicia, startX, startY) {
     var picture = new Image();
     picture.src = "pic\\suflik-1-biela.png";
-    
-    ctx.drawImage(picture, startX, startY);
-//        ctx.drawImage(picture, 203, 265, 350, 160);
+    picture.onload = function() {
+        ctx.drawImage(picture, startX, startY);
+    }
 }
 
 function drawPredok() {
     var vyska = korpus.vyska;
-//    var pictureTest = new Image();
-//    pictureTest.src = "pic\\suflik-1-biela.png";
-//    ctx.drawImage(pictureTest, 124, 265);
     var picture = new Image();
     picture.src = "pic\\suflik-1-cervena.png";
-    
     for (var i=0; i<koordinaty.length; i++) {
         if ((koordinaty[i].zaradenie===vyska)&&(koordinaty[i].zobraz===true)) {
+                                
             for (var j=1; j<4; j++) {
                 if (koordinaty[i].pozicia===j) {
-                    ctx.drawImage(picture, koordinaty[i].startX, koordinaty[i].startY);
-                    
+                    picture.src = "pic\\suflik-1-"+koordinaty[i].farba+".png";
+                    console.log(picture.src);
+                    var startX = koordinaty[i].startX;
+                    var startY = koordinaty[i].startY;
+//                    picture.onload = function() {
+                        ctx.drawImage(picture, startX, startY);
+//                    }
                 }
             }
         }
