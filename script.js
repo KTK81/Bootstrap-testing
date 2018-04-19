@@ -1,8 +1,3 @@
-//1. nacitanie obrazku korpusu na zaciatku - window.onload
-//2. pri rozmych farbach suflikov nacita len niektore
-//3. pozicia canvasu / nahrada canvasu - problem s position absolute / relative / koordinatmi
-//5.  nacitanie suflikov na 1. click -  picture.onload = function() 
-
 var korpus = {
     pomocnyNazov: "pic\\korpus-",
     zaradenie: "NS2",
@@ -183,7 +178,6 @@ function drawPredok() {
     var vyska = korpus.vyska;
     for (var i = 0; i < koordinaty.length; i++) {
         if ((koordinaty[i].zaradenie === vyska) && (koordinaty[i].zobraz === true)) {
-
             for (var j = 1; j < 4; j++) {
                 if (koordinaty[i].pozicia === j) {
                     var picture = new Image();
