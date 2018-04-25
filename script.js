@@ -33,8 +33,7 @@ function init() {
     // ************************** hlavna funkcia, ktora meni zobrazeny obrazok  ***************************
     //zmeni dany parameter v objecte, nacita z objectu novu verziu suboru k obrazku, prisposobi canvas obrazku, zobrazi novy obrazok
     image = new Image();
-    canvas = document.getElementById("mainPicture");
-    ctx = canvas.getContext('2d');
+
 
     //***** horne hlavne menu **** MENU + funkcie na zobrazenie len vybranych <div> elementov
     var menuRozmery = document.getElementById("navRozmery");
@@ -91,23 +90,27 @@ function init() {
     });
 
     // *****************   PREDOK  / SUFLIK / HLAVNY PROBLEM********************
-    var btnSuf3 = document.getElementById("suf3");
-    btnSuf3.addEventListener("click", function () {
-        drawCanvas(3, 124, 54)
-    });
-    var btnSuf2 = document.getElementById("suf2");
-    btnSuf2.addEventListener("click", function () {
-        drawCanvas(2, 124, 265)
-    });
-    var btnSuf1 = document.getElementById("suf1");
-    btnSuf1.addEventListener("click", function () {
-        drawCanvas(1, 124, 478)
-    });
-    //var btnSufB = document.getElementById("sufB");
-    //btnSufB.addEventListener("click",function() {drawCanvas(130, 160)});
-    var btnSufA = document.getElementById("sufA");
-    btnSufA.addEventListener("click", drawPredok);
+//    var btnSuf3 = document.getElementById("suf3");
+//    btnSuf3.addEventListener("click", function () {
+//        drawCanvas(3, 124, 54)
+//    });
+//    var btnSuf2 = document.getElementById("suf2");
+//    btnSuf2.addEventListener("click", function () {
+//        drawCanvas(2, 124, 265)
+//    });
+//    var btnSuf1 = document.getElementById("suf1");
+//    btnSuf1.addEventListener("click", function () {
+//        drawCanvas(1, 124, 478)
+//    });
+//    var btnSufA = document.getElementById("sufA");
+//    btnSufA.addEventListener("click", drawPredok);
 
+    
+            var btn = document.getElementById("testovacibutton");
+        btn.addEventListener("click", function() {
+            document.getElementById("mainPicture").setAttribute("xlink:href", "pic\\korpus-v20-s20-wenge.jpg");
+        })
+    
 }
 
 function showChoice(rozmer, farba, predok, TEST) {
@@ -119,17 +122,30 @@ function showChoice(rozmer, farba, predok, TEST) {
 
 //zmeni hlavny obrazok
 function changeInfo(vlastnost, hodnota) {
+    var mainPicture = document.getElementById("mainPicture");
     korpus[vlastnost] = hodnota;
     image.src = korpus.obrSubor();
-//    canvas.width=image.width;
-//    canvas.height=image.height;
     textName.innerText = image.src;
     image.onload = function () {
-        canvas.width = image.naturalWidth;
-        canvas.height = image.naturalHeight;
-        ctx.drawImage(image, 0, 0);
+        mainPicture.setAttributeNS("korpus-v20-s20-wenge.jpg", "href", URL);
+        
+
     }
 }
+
+
+
+
+            
+function testovaciaFunkcia() {
+    var testBtn = document.getElementById("testovacibutton");
+    var mainPicture = document.getElementById("mainPicture");
+    testBtn.addEventListener("click", function() {
+        mainPicture.setAttributeNS('pic\\korpus-v20-s20-wenge.jpg', 'href', url);
+        textName.innerText = image.src;
+    })
+    }
+
 
 function zistiCoords() {
     showChoice("none", "none", "none", "block");
@@ -173,27 +189,30 @@ function drawCanvas(pozicia, startX, startY) {
         ctx.drawImage(picture, startX, startY);
     }
 }
+            
+        
 
-function drawPredok() {
-    var vyska = korpus.vyska;
-    for (var i = 0; i < koordinaty.length; i++) {
-        if ((koordinaty[i].zaradenie === vyska) && (koordinaty[i].zobraz === true)) {
-            for (var j = 1; j < 4; j++) {
-                if (koordinaty[i].pozicia === j) {
-                    var picture = new Image();
-                    picture.startX = koordinaty[i].startX;
-                    picture.startY = koordinaty[i].startY;
-                    picture.src = "pic\\suflik-1-" + koordinaty[i].farba + ".png";
-                    picture.onload = function () {
-                        ctx.drawImage(this, this.startX, this.startY);
-                        
-                    }
-
-                }
-            }
-        }
-    }
-}
+//function drawPredok() {
+//    var vyska = korpus.vyska;
+//    for (var i = 0; i < koordinaty.length; i++) {
+//        if ((koordinaty[i].zaradenie === vyska) && (koordinaty[i].zobraz === true)) {
+//            for (var j = 1; j < 4; j++) {
+//                if (koordinaty[i].pozicia === j) {
+//                    var picture = new Image();
+//                    picture.startX = koordinaty[i].startX;
+//                    picture.startY = koordinaty[i].startY;
+//                    picture.src = "pic\\suflik-1-" + koordinaty[i].farba + ".png";
+//                    picture.onload = function () {
+//                        ctx.drawImage(this, this.startX, this.startY);
+//                        
+//                    }
+//
+//                }
+//            }
+//        }
+//    }
+//}
+        
 
 
 

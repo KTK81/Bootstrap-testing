@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #container {
+            width: 100%;
+            height: 700px;
+            background-color: aquamarine;
+            border: 1px solid blue;
+            position: relative;
+        }
+        
+        #svgFirst {
+            border: 1px solid green;
+            width: 80%;
+            height: 100%;
+            fill: yellow;
+        }
+        
+        #svgSecond {
+            border: 1px solid blue;
+            width: 100px;
+            height: 100px%;
+/*            fill: yellow;*/
+        }
+        
+        #rectSecond {
+            width: 50px;
+            height: 100px;
+            fill:yellow;
+        }
+        
+        
+        #svgSuflik {
+            border: 1px solid red;
+            position: absolute;
+            fill: yellow;
+        }
+
+        #svgSuflik2 {
+            border: 1px solid red;
+            position: absolute;
+            fill: yellow;
+        }
+        
+         #svgSuflik3 {
+            border: 1px solid red;
+            position: absolute;
+/*            fill: yellow;*/
+        }
+        
+        #svgKorpus {
+            border: 1px solid red;
+            position: absolute;
+/*
+            top: 200px;
+            left: 100;
+*/
+        }
+        
+        #svgSuflik:hover {
+            opacity: 0.7;
+        }
+        
+        #svgSuflik2:hover {
+            opacity: 0.6;
+        }
+        
+        #svgSuflik3:hover {
+            opacity: 0.5;
+        }
+        
+    </style>
+</head>
+    
+    
+<body>
+    <div id="container">
+        <svg  id="svgFirst" >
+            <svg id="svgKorpus" x="10" y="10" preserveAspectRatio="xMinYMin" viewBox="0 0 720 780">
+                <image xlink:href="korpus-v30-s20-dub.jpg"/>
+           
+            <svg id="svgSuflik" x="124px" y="54px" width="64.2%" height="26.5%" preserveAspectRatio="none " viewBox="0 0 462 210">
+                <image xlink:href="suflik-1-cervena.png" />
+            </svg>
+
+            <svg id="svgSuflik2" x="124px" y="265px" width="64.2%" height="26.5%" preserveAspectRatio="none " viewBox="0 0 462 210">
+                <image xlink:href="suflik-1-biela.png" />
+            </svg>
+            
+            <svg id="svgSuflik3" x="124px" y="478px" width="64.2%" height="26.5%" preserveAspectRatio="none " viewBox="0 0 462 210">
+                <image id="pokusnySuflik" xlink:href="suflik-1-siva.png" />
+            </svg>
+            </svg>
+        </svg> 
+        <svg id="svgSecond">
+<!--            <rect id="rectSecond" style="fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)" />-->
+            <rect id="rectSecond"/>
+        </svg>
+        <button id="zmenSRC">zmen</button>
+    </div>
+    
+    <p id="textPokusny">oko</p>
+
+    
+<script>
+        var btn = document.getElementById("zmenSRC");
+        btn.addEventListener("click", function() {
+            document.getElementById("pokusnySuflik").setAttribute("xlink:href", "suflik-1-biela.png");
+//            zmenSRC.innerHTML=document.getElementById("pokusnySuflik").getAttribute("xlink:href");
+            pokusnySuflik.setAttributeNS('suflik-1-biela.png', 'href', 'suflik-1-biela.png');
+            document.getElementById("rectSecond").setAttribute("fill", "#333");
+        })
+    
+    function zmenVeci() {
+        textPokusny.innerHTML="AAAnooooo";
+    }
+    
+    function initCanvas() {
+        textPokusny.innerHTML="66666";
+    }
+    
+    window.addEventListener('load', function(event) {
+    initCanvas();
+});
+</script>
+    
+</body>
+</html>

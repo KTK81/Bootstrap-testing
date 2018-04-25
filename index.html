@@ -18,9 +18,13 @@
         <div class="row">
             <!-- HLAVNY obrazok -->
         <div class="col-md-8 hlavnyObrazok">
-            <canvas id="mainPicture"></canvas>
-            <p id="textName">text</p>
+            <svg id="svgKorpus" x="10" y="10" preserveAspectRatio="xMinYMin" viewBox="0 0 720 780">
+                <image id="mainPicture" xlink:href="pic\\korpus-v30-s20-biela.jpg"/> 
+            </svg>
+<!--            <canvas id="mainPicture"></canvas>-->
+            
         </div>
+            
             
         <div class="col-md-4 vyberMenu">
             <div id="menu">
@@ -36,6 +40,8 @@
                 <h3 class="my-3">Vyber si výšku</h3>
                 <button id="btnH10">Maly</button>
                 <button id="btnH20">Stredny</button>
+                <button id="testovacibutton">Zmen daco</button>
+                <p id="textName">text</p>
             </div>
 
             <div id="vyberFarba" class="vyberMenu">
