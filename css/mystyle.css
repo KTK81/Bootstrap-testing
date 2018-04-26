@@ -24,11 +24,11 @@ div.hlavnyObrazok {
 }
 
 #mainPicture {
-    width: 90%;
-    height: 80%;
+    width: 100%;
+    height: 100%;
     border: 1px solid black;
-/*    position: absolute;*/
-    z-index: 0;
+    position: absolute;
+/*    z-index: 0;*/
 }
 
 
@@ -49,23 +49,25 @@ img.icon {
             fill: yellow;
         }
         
-        #svgSuflik {
+        #svgSuflik1 {
             border: 1px solid red;
             position: absolute;
             fill: yellow;
-            visibility:inherit;
+            display: none;
         }
 
         #svgSuflik2 {
             border: 1px solid red;
             position: absolute;
             fill: yellow;
+            display: none;
         }
         
          #svgSuflik3 {
             border: 1px solid red;
             position: absolute;
             fill: yellow;
+            display: none;
         }
         
         #svgKorpus {
@@ -73,14 +75,14 @@ img.icon {
             position: absolute;
         }
         
-        #svgSuflik:hover {
-            opacity: 0.7;
+        #svgSuflik3:hover {
+            opacity: 0.8;
         }
         
         #svgSuflik2:hover {
-            opacity: 0.6;
+            opacity: 0.8;
         }
         
-        #svgSuflik3:hover {
-            opacity: 0.5;
+        #svgSuflik1:hover {
+            opacity: 0.8;
         }
