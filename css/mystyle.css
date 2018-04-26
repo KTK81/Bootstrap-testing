@@ -49,6 +49,12 @@ img.icon {
             fill: yellow;
         }
         
+        #svgKorpus {
+/*            width: 90%;*/
+            border: 1px solid green;
+            position: absolute;
+        }
+
         #svgSuflik1 {
             border: 1px solid red;
             position: absolute;
@@ -70,10 +76,7 @@ img.icon {
             display: none;
         }
         
-        #svgKorpus {
-            border: 1px solid red;
-            position: absolute;
-        }
+
         
         #svgSuflik3:hover {
             opacity: 0.8;

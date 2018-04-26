@@ -20,7 +20,7 @@ var koordinaty = [
 
 window.onload = function (e) {
     init();
-    showChoice("block", "block", "block")
+    showChoice("block", "block", "block");
     changeInfo("vyska", "v20");
 }
 
@@ -29,18 +29,14 @@ var canvas = null;
 var image = null;
 
 function init() {
-
-    // ************************** hlavna funkcia, ktora meni zobrazeny obrazok  ***************************
-    //zmeni dany parameter v objecte, nacita z objectu novu verziu suboru k obrazku, prisposobi canvas obrazku, zobrazi novy obrazok
     image = new Image();
 
 
-    //***** horne hlavne menu **** MENU + funkcie na zobrazenie len vybranych <div> elementov
+//***** horne hlavne menu **** MENU + funkcie na zobrazenie len vybranych <div> elementov **********************************
     var menuRozmery = document.getElementById("navRozmery");
     var menuFarba = document.getElementById("navFarba");
     var menuSuflik = document.getElementById("navSuflik");
     var menuAll = document.getElementById("navAll");
-
 
     menuRozmery.addEventListener("click", function () {
         showChoice("block", "none", "none")
@@ -55,7 +51,11 @@ function init() {
         showChoice("block", "block", "block")
     });
 
-    // *        **** ROZMERY *****
+
+        
+//********************************************   ROZNE MANIPULACIE SO SAMOTNYM OBRAZKOM *************************************
+    
+// *************** ROZMERY **************
     var btnHeight10 = document.getElementById("btnH10");
     var btnHeight20 = document.getElementById("btnH20");
     btnHeight10.addEventListener("click", function () {
@@ -65,7 +65,7 @@ function init() {
         changeInfo("vyska", "v30")
     });
 
-    //       ***** FARBY *****
+//       ***** FARBY ********************
     var btnBiela = document.getElementById("btnColorBiela");
     var btnBuk = document.getElementById("btnColorBuk");
     var btnDub = document.getElementById("btnColorDub");
@@ -87,7 +87,7 @@ function init() {
         changeInfo("farba", "wenge")
     });
 
-    // *****************   PREDOK  / SUFLIK / HLAVNY PROBLEM********************
+// *****************   PREDOK  / SUFLIK / HLAVNY PROBLEM***************
     var btnSuf3 = document.getElementById("suf3");
     btnSuf3.addEventListener("click", function () {
        drawSuflik(3);
@@ -112,6 +112,8 @@ function showChoice(rozmer, farba, predok) {
     document.getElementById("vyberPredok").style.display = predok;
 }
 
+// ************************** hlavna funkcia, ktora meni zobrazeny obrazok  ***************************
+//zmeni dany parameter v objecte, nacita z objectu novu verziu suboru k obrazku, prisposobi canvas obrazku, zobrazi novy obrazok
 //zmeni hlavny obrazok
 function changeInfo(vlastnost, hodnota) {
     var mainPicture = document.getElementById("mainPicture");
@@ -121,7 +123,6 @@ function changeInfo(vlastnost, hodnota) {
         mainPicture.setAttribute("xlink:href", korpus.obrSubor());
     }
 }
-
 
 function drawSuflik(pozicia) {
     var suflikCislo = "svgSuflik"+pozicia;
@@ -138,7 +139,7 @@ function testSuflik() {
     var link = "pic\\suflik-1-cervena.png";
     var suflik = document.getElementById("suf3IMG");
     
-    suflik.style.display = "none";
+    suflik.style.display = "block";
         suflik.setAttribute("xlink:href", link);
 }
 
