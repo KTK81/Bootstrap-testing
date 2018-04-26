@@ -20,7 +20,7 @@ var koordinaty = [
 
 window.onload = function (e) {
     init();
-    showChoice("block", "block", "block", "none")
+    showChoice("block", "block", "block")
     changeInfo("vyska", "v20");
 }
 
@@ -39,22 +39,20 @@ function init() {
     var menuRozmery = document.getElementById("navRozmery");
     var menuFarba = document.getElementById("navFarba");
     var menuSuflik = document.getElementById("navSuflik");
-    var menuCoords = document.getElementById("navCoords");
     var menuAll = document.getElementById("navAll");
 
 
     menuRozmery.addEventListener("click", function () {
-        showChoice("block", "none", "none", "none")
+        showChoice("block", "none", "none")
     });
     menuFarba.addEventListener("click", function () {
-        showChoice("none", "block", "none", "none")
+        showChoice("none", "block", "none")
     });
     menuSuflik.addEventListener("click", function () {
-        showChoice("none", "none", "block", "none")
+        showChoice("none", "none", "block")
     });
-    menuCoords.addEventListener("click", zistiCoords);
     menuAll.addEventListener("click", function () {
-        showChoice("block", "block", "block", "none")
+        showChoice("block", "block", "block")
     });
 
     // *        **** ROZMERY *****
@@ -104,20 +102,14 @@ function init() {
 //    });
 //    var btnSufA = document.getElementById("sufA");
 //    btnSufA.addEventListener("click", drawPredok);
-
-    
-            var btn = document.getElementById("testovacibutton");
-        btn.addEventListener("click", function() {
-            document.getElementById("mainPicture").setAttribute("xlink:href", "pic\\korpus-v20-s20-wenge.jpg");
-        })
     
 }
 
-function showChoice(rozmer, farba, predok, TEST) {
+
+function showChoice(rozmer, farba, predok) {
     document.getElementById("vyberRozmer").style.display = rozmer;
     document.getElementById("vyberFarba").style.display = farba;
     document.getElementById("vyberPredok").style.display = predok;
-    document.getElementById("vyberTEST").style.display = TEST;
 }
 
 //zmeni hlavny obrazok
@@ -125,72 +117,11 @@ function changeInfo(vlastnost, hodnota) {
     var mainPicture = document.getElementById("mainPicture");
     korpus[vlastnost] = hodnota;
     image.src = korpus.obrSubor();
-    textName.innerText = image.src;
     image.onload = function () {
-        mainPicture.setAttributeNS("korpus-v20-s20-wenge.jpg", "href", URL);
-        
-
+        mainPicture.setAttribute("xlink:href", korpus.obrSubor());
     }
 }
 
-
-
-
-            
-function testovaciaFunkcia() {
-    var testBtn = document.getElementById("testovacibutton");
-    var mainPicture = document.getElementById("mainPicture");
-    testBtn.addEventListener("click", function() {
-        mainPicture.setAttributeNS('pic\\korpus-v20-s20-wenge.jpg', 'href', url);
-        textName.innerText = image.src;
-    })
-    }
-
-
-function zistiCoords() {
-    showChoice("none", "none", "none", "block");
-    ctx.canvas.addEventListener('mousemove', function (event) {
-        var mouseX = event.layerX;
-        var mouseY = event.layerY;
-        var mouseXclient = event.clientX;
-        var mouseYclient = event.clientY;
-        var mouseXOffset = event.layerX - ctx.canvas.offsetLeft;
-        var mouseYOffset = event.layerY - ctx.canvas.offsetTop;
-        var mouseXClientOffset = event.clientX - ctx.canvas.offsetLeft;
-        var mouseYClientOffset = event.clientY - ctx.canvas.offsetTop;
-        statusTest.innerHTML = "event.layerX  " + mouseX + " | " + mouseY;
-        statusClient.innerHTML = "event.clientX  " + mouseXclient + " | " + mouseYclient;
-        statusLayerOff.innerHTML = "offset layer " + mouseXOffset + " | " + mouseYOffset;
-        statusClientOff.innerHTML = "offset client " + mouseXClientOffset + " | " + mouseYClientOffset;
-    });
-    ctx.canvas.addEventListener('click', function (event) {
-        var mouseX = event.layerX;
-        var mouseY = event.layerY;
-        clickKoordinaty.innerHTML = "event.layerX/Y  " + mouseX + " | " + mouseY;
-    });
-//        ctx.canvas.addEventListener('click', function(event){
-//            function search(nameKey, nameKey2) {
-//                for (var i=0; i<koordinaty.length; i++) {
-//                    if ((koordinaty[i].zaradenie===nameKey)&&(koordinaty[i].pozicia===nameKey2)) {
-//                        return koordinaty[i];
-//                    }
-//                }
-//            }
-//            var test = search("v20", "1");
-//            clickKoordinaty.innerHTML = test.startY;
-//    });
-
-}
-
-function drawCanvas(pozicia, startX, startY) {
-    var picture = new Image();
-    picture.src = "pic\\suflik-1-biela.png";
-    picture.onload = function () {
-        ctx.drawImage(picture, startX, startY);
-    }
-}
-            
-        
 
 //function drawPredok() {
 //    var vyska = korpus.vyska;
@@ -212,7 +143,7 @@ function drawCanvas(pozicia, startX, startY) {
 //        }
 //    }
 //}
-        
+
 
 
 
