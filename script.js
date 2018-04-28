@@ -11,11 +11,11 @@ var korpus = {
 };
 
 var koordinaty = [
-    {zaradenie: "v20", pozicia: 2, startX: "130", startY: "160", endX: "588", endY: "368", farba: "siva", zobraz: true},
-    {zaradenie: "v20", pozicia: 1, startX: "130", startY: "370", endX: "588", endY: "583", farba: "siva", zobraz: true},
-    {zaradenie: "v30", pozicia: 3, startX: "124", startY: "54", endX: "583", endY: "263", farba: "siva", zobraz: true},
-    {zaradenie: "v30", pozicia: 2, startX: "124", startY: "265", endX: "583", endY: "475", farba: "siva", zobraz: true},
-    {zaradenie: "v30", pozicia: 1, startX: "124", startY: "478", endX: "583", endY: "691", farba: "siva", zobraz: true},
+    {zaradenie: "v20", pozicia: 2, startX: "130", startY: "160", endX: "588", endY: "368", farba: "cervena", display:"block"},
+    {zaradenie: "v20", pozicia: 1, startX: "130", startY: "370", endX: "588", endY: "583", farba: "biela", display:"block"},
+    {zaradenie: "v30", pozicia: 3, startX: "124", startY: "54", endX: "583", endY: "263", farba: "siva", display:"block"},
+    {zaradenie: "v30", pozicia: 2, startX: "124", startY: "265", endX: "583", endY: "475", farba: "biela", display:"block"},
+    {zaradenie: "v30", pozicia: 1, startX: "124", startY: "478", endX: "583", endY: "691", farba: "siva", display:"block"},
 ];
 
 window.onload = function (e) {
@@ -101,7 +101,7 @@ function init() {
         drawSuflik(1);
     });
     var btnSufA = document.getElementById("sufA");
-    btnSufA.addEventListener("click", testSuflik);
+    btnSufA.addEventListener("click", zobrazVsetkysufliky);
     
 }
 
@@ -128,22 +128,30 @@ function drawSuflik(pozicia) {
     var suflikCislo = "svgSuflik"+pozicia;
     var suflik=document.getElementById(suflikCislo);
     var style = suflik.style.display;
-    kontrolnyText.innerHTML=style;
-    if(style === "block")
-        suflik.style.display = "none";
-    else
-        suflik.style.display = "block";
+    var vyska = korpus.vyska;
+    for (var i=0; i<koordinaty.length; i++) {
+        if (koordinaty[i].zaradenie===vyska) {
+            if (koordinaty[i].pozicia===pozicia) {
+                //*** FARBA ***
+                var sufIMG = "suf"+pozicia+"IMG";
+                var sufFarba=document.getElementById(sufIMG);
+                var suflikFarba = "pic\\suflik-1-"+koordinaty[i].farba+".png";
+                sufFarba.setAttribute("xlink:href", suflikFarba);
+                //*** ZOBRAZENIE ***
+                if(style === "block") {
+                        suflik.style.display = "none";
+                    }
+                else
+                    suflik.style.display = "block";
+            }            
+        }
+    }
 }
 
-function testSuflik() {
-    var link = "pic\\suflik-1-cervena.png";
-    var suflik = document.getElementById("suf3IMG");
-    
-    suflik.style.display = "block";
-        suflik.setAttribute("xlink:href", link);
+function zobrazVsetkysufliky() {
+    for (var i=1; i<4; i++)
+        drawSuflik(i);
 }
-
-
 
 
 function drawPredok() {
