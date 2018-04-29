@@ -11,11 +11,11 @@ var korpus = {
 };
 
 var koordinaty = [
-    {zaradenie: "v20", pozicia: 2, startX: "130", startY: "160", endX: "588", endY: "368", farba: "cervena", display:"block"},
-    {zaradenie: "v20", pozicia: 1, startX: "130", startY: "370", endX: "588", endY: "583", farba: "biela", display:"block"},
-    {zaradenie: "v30", pozicia: 3, startX: "124", startY: "54", endX: "583", endY: "263", farba: "siva", display:"block"},
-    {zaradenie: "v30", pozicia: 2, startX: "124", startY: "265", endX: "583", endY: "475", farba: "biela", display:"block"},
-    {zaradenie: "v30", pozicia: 1, startX: "124", startY: "478", endX: "583", endY: "691", farba: "siva", display:"block"},
+    {zaradenie: "v20", pozicia: 2, startX: 130, startY: 160, endX: "588", endY: "368", sirka:"64.2%", vyska:"26.5%", farba: "cervena", display:"block"},
+    {zaradenie: "v20", pozicia: 1, startX: 130, startY: 370, endX: "588", endY: "583", sirka:"64.2%", vyska:"26.5%", farba: "biela", display:"block"},
+    {zaradenie: "v30", pozicia: 3, startX: 124, startY: 54, endX: "583", endY: "263", sirka:"64.2%", vyska:"26.5%", farba: "cervena", display:"block"},
+    {zaradenie: "v30", pozicia: 2, startX: 124, startY: 265, endX: "583", endY: "475", sirka:"64.2%", vyska:"26.5%", farba: "biela", display:"block"},
+    {zaradenie: "v30", pozicia: 1, startX: 124, startY: 478, endX: "583", endY: "691", sirka:"64.2%", vyska:"26.5%", farba: "siva", display:"block"},
 ];
 
 window.onload = function (e) {
@@ -126,27 +126,41 @@ function changeInfo(vlastnost, hodnota) {
 
 function drawSuflik(pozicia) {
     var suflikCislo = "svgSuflik"+pozicia;
-    var suflik=document.getElementById(suflikCislo);
-    var style = suflik.style.display;
+    var suflikKonkretny=document.getElementById(suflikCislo);
+    var style = suflikKonkretny.style.display;
     var vyska = korpus.vyska;
     for (var i=0; i<koordinaty.length; i++) {
         if (koordinaty[i].zaradenie===vyska) {
             if (koordinaty[i].pozicia===pozicia) {
-                //*** FARBA ***
                 var sufIMG = "suf"+pozicia+"IMG";
-                var sufFarba=document.getElementById(sufIMG);
+                var sufIMGKonkretny=document.getElementById(sufIMG);
                 var suflikFarba = "pic\\suflik-1-"+koordinaty[i].farba+".png";
-                sufFarba.setAttribute("xlink:href", suflikFarba);
+                
+                
+                //*** POZICIA ***
+                suflikKonkretny.setAttribute("x", koordinaty[i].startX);
+                suflikKonkretny.setAttribute("y", koordinaty[i].startY);
+                suflikKonkretny.setAttribute("width", koordinaty[i].sirka);
+                suflikKonkretny.setAttribute("height", koordinaty[i].vyska);
+                
+                
+                //*** FARBA ***
+                sufIMGKonkretny.setAttribute("xlink:href", suflikFarba);
                 //*** ZOBRAZENIE ***
                 if(style === "block") {
-                        suflik.style.display = "none";
+                        suflikKonkretny.style.display = "none";
                     }
                 else
-                    suflik.style.display = "block";
+                    suflikKonkretny.style.display = "block";
             }            
         }
     }
 }
+
+//podla vysky korpusu zisti max pocet suflikov v tejto vyske a vsetky sufliky mimo tejto vysky vypne
+//takze ked napr zmenim z vysokeho regala na mensi, tak sufliky mimo maleho regala sa prestanu zobrazovat
+function sufVypniMimoKorpus
+
 
 function zobrazVsetkysufliky() {
     for (var i=1; i<4; i++)
