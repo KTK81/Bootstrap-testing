@@ -129,6 +129,7 @@ function drawSuflik(pozicia) {
     var suflikKonkretny=document.getElementById(suflikCislo);
     var style = suflikKonkretny.style.display;
     var vyska = korpus.vyska;
+        sufVypniMimoKorpus(vyska);
     for (var i=0; i<koordinaty.length; i++) {
         if (koordinaty[i].zaradenie===vyska) {
             if (koordinaty[i].pozicia===pozicia) {
@@ -147,6 +148,8 @@ function drawSuflik(pozicia) {
                 //*** FARBA ***
                 sufIMGKonkretny.setAttribute("xlink:href", suflikFarba);
                 //*** ZOBRAZENIE ***
+                
+                
                 if(style === "block") {
                         suflikKonkretny.style.display = "none";
                     }
@@ -155,11 +158,27 @@ function drawSuflik(pozicia) {
             }            
         }
     }
+
 }
 
 //podla vysky korpusu zisti max pocet suflikov v tejto vyske a vsetky sufliky mimo tejto vysky vypne
 //takze ked napr zmenim z vysokeho regala na mensi, tak sufliky mimo maleho regala sa prestanu zobrazovat
-function sufVypniMimoKorpus
+function sufVypniMimoKorpus() {
+    var maxSuflik = 1;
+    var vyska = korpus.vyska;
+    for (var i=0; i<koordinaty.length; i++) {
+        if (koordinaty[i].zaradenie===vyska) {
+            if (koordinaty[i].pozicia>maxSuflik)
+                maxSuflik=koordinaty[i].pozicia;
+        }
+    }
+    console.log(maxSuflik);
+    for (var j=0; j<koordinaty.length;j++) {
+        if (koordinaty[j].pozicia>maxSuflik)
+            koordinaty[j].display="none";
+    }
+    console.log(koordinaty[2].display);
+}
 
 
 function zobrazVsetkysufliky() {
