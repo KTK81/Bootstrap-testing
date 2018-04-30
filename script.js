@@ -10,12 +10,12 @@ var korpus = {
     }
 };
 
-var koordinaty = [
-    {zaradenie: "v20", pozicia: 2, startX: 130, startY: 160, endX: "588", endY: "368", sirka:"64.2%", vyska:"26.5%", farba: "cervena", display:"block"},
-    {zaradenie: "v20", pozicia: 1, startX: 130, startY: 370, endX: "588", endY: "583", sirka:"64.2%", vyska:"26.5%", farba: "biela", display:"block"},
-    {zaradenie: "v30", pozicia: 3, startX: 124, startY: 54, endX: "583", endY: "263", sirka:"64.2%", vyska:"26.5%", farba: "cervena", display:"block"},
-    {zaradenie: "v30", pozicia: 2, startX: 124, startY: 265, endX: "583", endY: "475", sirka:"64.2%", vyska:"26.5%", farba: "biela", display:"block"},
-    {zaradenie: "v30", pozicia: 1, startX: 124, startY: 478, endX: "583", endY: "691", sirka:"64.2%", vyska:"26.5%", farba: "siva", display:"block"},
+var sufliky = [
+    {zaradenie: "v20", pozicia: 2, startX: 130, startY: 160, endX: "588", endY: "368", sirka:"64.2%", vyska:"26.5%", farba: "cervena", display:"none"},
+    {zaradenie: "v20", pozicia: 1, startX: 130, startY: 370, endX: "588", endY: "583", sirka:"64.2%", vyska:"26.5%", farba: "biela", display:"none"},
+    {zaradenie: "v30", pozicia: 3, startX: 124, startY: 54, endX: "583", endY: "263", sirka:"64.2%", vyska:"26.5%", farba: "cervena", display:"none"},
+    {zaradenie: "v30", pozicia: 2, startX: 124, startY: 265, endX: "583", endY: "475", sirka:"64.2%", vyska:"26.5%", farba: "biela", display:"none"},
+    {zaradenie: "v30", pozicia: 1, startX: 124, startY: 478, endX: "583", endY: "691", sirka:"64.2%", vyska:"26.5%", farba: "siva", display:"none"},
 ];
 
 window.onload = function (e) {
@@ -90,18 +90,18 @@ function init() {
 // *****************   PREDOK  / SUFLIK / HLAVNY PROBLEM***************
     var btnSuf3 = document.getElementById("suf3");
     btnSuf3.addEventListener("click", function () {
-       drawSuflik(3);
+       sufOnOff(3);
     });
     var btnSuf2 = document.getElementById("suf2");
     btnSuf2.addEventListener("click", function () {
-        drawSuflik(2);
+        sufOnOff(2);
     });
     var btnSuf1 = document.getElementById("suf1");
     btnSuf1.addEventListener("click", function () {
-        drawSuflik(1);
+        sufOnOff(1);
     });
     var btnSufA = document.getElementById("sufA");
-    btnSufA.addEventListener("click", zobrazVsetkysufliky);
+    btnSufA.addEventListener("click", drawSufliky);
     
 }
 
@@ -116,49 +116,62 @@ function showChoice(rozmer, farba, predok) {
 //zmeni dany parameter v objecte, nacita z objectu novu verziu suboru k obrazku, prisposobi canvas obrazku, zobrazi novy obrazok
 //zmeni hlavny obrazok
 function changeInfo(vlastnost, hodnota) {
+//    drawSufliky();
     var mainPicture = document.getElementById("mainPicture");
     korpus[vlastnost] = hodnota;
     image.src = korpus.obrSubor();
     image.onload = function () {
         mainPicture.setAttribute("xlink:href", korpus.obrSubor());
     }
+    drawSufliky();
 }
 
-function drawSuflik(pozicia) {
-    var suflikCislo = "svgSuflik"+pozicia;
-    var suflikKonkretny=document.getElementById(suflikCislo);
-    var style = suflikKonkretny.style.display;
+// ************   ZOBRAZENIE VSETKYCH SUFLIKOV - konkretne nastavenia berie z objectu koordinaty
+function drawSufliky() {
     var vyska = korpus.vyska;
-        sufVypniMimoKorpus(vyska);
-    for (var i=0; i<koordinaty.length; i++) {
-        if (koordinaty[i].zaradenie===vyska) {
-            if (koordinaty[i].pozicia===pozicia) {
-                var sufIMG = "suf"+pozicia+"IMG";
-                var sufIMGKonkretny=document.getElementById(sufIMG);
-                var suflikFarba = "pic\\suflik-1-"+koordinaty[i].farba+".png";
+    sufVypniMimoKorpus(vyska);
+    for (var i=0; i<sufliky.length; i++) {
+        if (sufliky[i].zaradenie===vyska) {
+            var suflikCislo = "svgSuflik"+sufliky[i].pozicia;
+            var suflikKonkretny=document.getElementById(suflikCislo);
+            var sufIMG = "suf"+sufliky[i].pozicia+"IMG";
+            var sufIMGKonkretny=document.getElementById(sufIMG);
+            var style = suflikKonkretny.style.display;
+            var suflikFarba = "pic\\suflik-1-"+sufliky[i].farba+".png";
+            
+            //*** POZICIA ***
+            suflikKonkretny.setAttribute("x", sufliky[i].startX);
+            suflikKonkretny.setAttribute("y", sufliky[i].startY);
+            suflikKonkretny.setAttribute("width", sufliky[i].sirka);
+            suflikKonkretny.setAttribute("height", sufliky[i].vyska);
                 
-                
-                //*** POZICIA ***
-                suflikKonkretny.setAttribute("x", koordinaty[i].startX);
-                suflikKonkretny.setAttribute("y", koordinaty[i].startY);
-                suflikKonkretny.setAttribute("width", koordinaty[i].sirka);
-                suflikKonkretny.setAttribute("height", koordinaty[i].vyska);
-                
-                
-                //*** FARBA ***
-                sufIMGKonkretny.setAttribute("xlink:href", suflikFarba);
-                //*** ZOBRAZENIE ***
-                
-                
-                if(style === "block") {
-                        suflikKonkretny.style.display = "none";
+            //*** FARBA ***
+            sufIMGKonkretny.setAttribute("xlink:href", suflikFarba);
+
+            //*** ZOBRAZENIE ***
+            suflikKonkretny.style.display = sufliky[i].display;
+            
+        }
+        console.log("i: "+i+" ; pozicia: "+sufliky[i].pozicia+" ; farba: "+sufliky[i].farba+" ; zobraz: "+sufliky[i].display);
+    }
+    console.log("***************");
+}
+
+//u VSETKYCH suflikov na danej pozicii, bez ohladu na vysku korpusu, zmenim stav zobrazovania
+//takze ked zmenim vysku korpusu, tak na suflik na danej pozicii bude mat vzdy rovnaku hodnotu zbrazovania, bud ano alebo nie
+//takze nieze prvy suflik pri malom regale sa bude zobrazovat, ale ked zmenim vysku regalu, tak tam sa uz zobrazovat nebude, 
+//lebo kazda vyska bude mat vlastne nastavenia
+function sufOnOff(pozicia) {
+    for (var i=0; i<sufliky.length; i++) {
+            if (sufliky[i].pozicia===pozicia) {
+                if(sufliky[i].display === "block") {
+                    sufliky[i].display = "none";
                     }
                 else
-                    suflikKonkretny.style.display = "block";
+                    sufliky[i].display = "block";
             }            
-        }
     }
-
+    drawSufliky();
 }
 
 //podla vysky korpusu zisti max pocet suflikov v tejto vyske a vsetky sufliky mimo tejto vysky vypne
@@ -166,50 +179,18 @@ function drawSuflik(pozicia) {
 function sufVypniMimoKorpus() {
     var maxSuflik = 1;
     var vyska = korpus.vyska;
-    for (var i=0; i<koordinaty.length; i++) {
-        if (koordinaty[i].zaradenie===vyska) {
-            if (koordinaty[i].pozicia>maxSuflik)
-                maxSuflik=koordinaty[i].pozicia;
+    for (var i=0; i<sufliky.length; i++) {
+        if (sufliky[i].zaradenie===vyska) {
+            if (sufliky[i].pozicia>maxSuflik)
+                maxSuflik=sufliky[i].pozicia;
         }
     }
-    console.log(maxSuflik);
-    for (var j=0; j<koordinaty.length;j++) {
-        if (koordinaty[j].pozicia>maxSuflik)
-            koordinaty[j].display="none";
-    }
-    console.log(koordinaty[2].display);
-}
-
-
-function zobrazVsetkysufliky() {
-    for (var i=1; i<4; i++)
-        drawSuflik(i);
-}
-
-
-function drawPredok() {
-    var vyska = korpus.vyska;
-    for (var i = 0; i < koordinaty.length; i++) {
-        if ((koordinaty[i].zaradenie === vyska) && (koordinaty[i].zobraz === true)) {
-            for (var j = 1; j < 4; j++) {
-                if (koordinaty[i].pozicia === j) {
-                    var suflikCislo = "svgSuflik"+j;
-                    var link = "pic\\suflik-1-siva.png";
-                    var suflik=document.getElementById("svgSuflik3");
-                    suflik.setAttribute("xlink:href", link);
-                    suflik.style.display = "block";
-                    
-//                    var suflikFarba="pic\\suflik-1-" + koordinaty[i].farba + ".png";
-//                    suflik.setAttribute("xlink:href", suflikFarba);
-//                    kontrolnyText.innerHTML=suflik;
-//                    suflik.style.display = "block";
-//                    suflik.setAttribute("xlink:href", "pic\\suflik-1-siva.png");
-                }
-            }
+    for (var j=0; j<sufliky.length;j++) {
+        if (sufliky[j].pozicia>maxSuflik) {
+            sufliky[j].display="none";
+            var suflikCislo = "svgSuflik"+sufliky[j].pozicia;
+            var suflikKonkretny=document.getElementById(suflikCislo);
+            suflikKonkretny.style.display = "none";
         }
     }
 }
-
-
-
-
