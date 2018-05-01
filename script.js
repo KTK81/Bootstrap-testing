@@ -11,11 +11,11 @@ var korpus = {
 };
 
 var sufliky = [
-    {zaradenie: "v20", pozicia: 2, startX: 130, startY: 160, endX: "588", endY: "368", sirka:"64.2%", vyska:"26.5%", farba: "cervena", display:"none"},
+    {zaradenie: "v20", pozicia: 2, startX: 130, startY: 160, endX: "588", endY: "368", sirka:"64.2%", vyska:"26.5%", farba: "biela", display:"none"},
     {zaradenie: "v20", pozicia: 1, startX: 130, startY: 370, endX: "588", endY: "583", sirka:"64.2%", vyska:"26.5%", farba: "biela", display:"none"},
-    {zaradenie: "v30", pozicia: 3, startX: 124, startY: 54, endX: "583", endY: "263", sirka:"64.2%", vyska:"26.5%", farba: "cervena", display:"none"},
+    {zaradenie: "v30", pozicia: 3, startX: 124, startY: 54, endX: "583", endY: "263", sirka:"64.2%", vyska:"26.5%", farba: "biela", display:"none"},
     {zaradenie: "v30", pozicia: 2, startX: 124, startY: 265, endX: "583", endY: "475", sirka:"64.2%", vyska:"26.5%", farba: "biela", display:"none"},
-    {zaradenie: "v30", pozicia: 1, startX: 124, startY: 478, endX: "583", endY: "691", sirka:"64.2%", vyska:"26.5%", farba: "siva", display:"none"},
+    {zaradenie: "v30", pozicia: 1, startX: 124, startY: 478, endX: "583", endY: "691", sirka:"64.2%", vyska:"26.5%", farba: "biela", display:"none"},
 ];
 
 window.onload = function (e) {
@@ -111,17 +111,13 @@ function init() {
         sufOnOff(1);
     });
     
-    
-// **************** TESTOVANIE ***********   
-        document.getElementById("suf1IMG").addEventListener("click", function () {
-        testovanie();
-    });
-            document.getElementById("suf2IMG").addEventListener("click", function () {
-        testovanie();
-    });
 }
 
+function testovanie() {
+    console.log(event.target.id);
+}
 
+//vyber menu
 function showChoice(rozmer, farba, predok) {
     document.getElementById("vyberRozmer").style.display = rozmer;
     document.getElementById("vyberFarba").style.display = farba;
@@ -129,10 +125,9 @@ function showChoice(rozmer, farba, predok) {
 }
 
 // ************************** hlavna funkcia, ktora meni zobrazeny obrazok  ***************************
-//zmeni dany parameter v objecte, nacita z objectu novu verziu suboru k obrazku, prisposobi canvas obrazku, zobrazi novy obrazok
+//zmeni dany parameter v objecte, nacita z objectu novu verziu suboru k obrazku, zobrazi novy obrazok, zobrazi sufliky
 //zmeni hlavny obrazok
 function changeInfo(vlastnost, hodnota) {
-//    drawSufliky();
     var mainPicture = document.getElementById("mainPicture");
     korpus[vlastnost] = hodnota;
     image.src = korpus.obrSubor();
@@ -173,17 +168,26 @@ function drawSufliky() {
     console.log("***************");
 }
 
-function testovanie() {
-    console.log(event.target.id);
-}
-
-
-function sufZmenFarbu(farba) {
-    console.log(event.target.id);
+//podla vysky korpusu zisti max pocet suflikov v tejto vyske a vsetky sufliky mimo tejto vysky vypne
+//takze ked napr zmenim z vysokeho regala na mensi, tak sufliky mimo maleho regala sa prestanu zobrazovat
+function sufVypniMimoKorpus() {
+    var maxSuflik = 1;
+    var vyska = korpus.vyska;
     for (var i=0; i<sufliky.length; i++) {
-        sufliky[i].farba = farba;
+        if (sufliky[i].zaradenie===vyska) {
+            if (sufliky[i].pozicia>maxSuflik)
+                maxSuflik=sufliky[i].pozicia;
+        }
     }
-    drawSufliky();
+    for (var j=0; j<sufliky.length;j++) {
+        if (sufliky[j].pozicia>maxSuflik) {
+            sufliky[j].display="none";
+            sufliky[j].farba="biela";
+            var suflikCislo = "svgSuflik"+sufliky[j].pozicia;
+            var suflikKonkretny=document.getElementById(suflikCislo);
+            suflikKonkretny.style.display = "none";
+        }
+    }
 }
 
 //u VSETKYCH suflikov na danej pozicii, bez ohladu na vysku korpusu, zmenim stav zobrazovania
@@ -204,23 +208,38 @@ function sufOnOff(pozicia) {
     drawSufliky();
 }
 
-//podla vysky korpusu zisti max pocet suflikov v tejto vyske a vsetky sufliky mimo tejto vysky vypne
-//takze ked napr zmenim z vysokeho regala na mensi, tak sufliky mimo maleho regala sa prestanu zobrazovat
-function sufVypniMimoKorpus() {
-    var maxSuflik = 1;
-    var vyska = korpus.vyska;
-    for (var i=0; i<sufliky.length; i++) {
-        if (sufliky[i].zaradenie===vyska) {
-            if (sufliky[i].pozicia>maxSuflik)
-                maxSuflik=sufliky[i].pozicia;
+//u VSETKYCH suflikov na danej pozicii, bez ohladu na vysku korpusu, zmenim farbu
+//najprv zistim, ktoru farbu klikol, pomocou atributu v hlavnej funkcii, nasledne kliknutie na niektory suflik spusti druhu funkciu,
+//ktora zisti na ktory SVG klikol a na tychto poziciach zmeni farbu suflikov
+function sufZmenFarbu(farbaKliknuta) {
+    document.getElementById("suf1IMG").addEventListener("click", function () {
+        zistiPoziciu();
+    });
+    document.getElementById("suf2IMG").addEventListener("click", function () {
+        zistiPoziciu();
+    });
+    document.getElementById("suf3IMG").addEventListener("click", function () {
+        zistiPoziciu();
+    });
+    
+    function zistiPoziciu() {
+        var element = event.target.id;
+        var pozicia = 0;
+        if (element.includes("1"))
+            pozicia = 1;
+        else if (element.includes("2"))
+            pozicia = 2;
+        else if (element.includes("3"))
+            pozicia = 3;
+        
+        for (var i=0; i<sufliky.length; i++) {
+            if (sufliky[i].pozicia===pozicia) {
+                sufliky[i].farba = farbaKliknuta;
+            }
         }
-    }
-    for (var j=0; j<sufliky.length;j++) {
-        if (sufliky[j].pozicia>maxSuflik) {
-            sufliky[j].display="none";
-            var suflikCislo = "svgSuflik"+sufliky[j].pozicia;
-            var suflikKonkretny=document.getElementById(suflikCislo);
-            suflikKonkretny.style.display = "none";
-        }
+        drawSufliky();
     }
 }
+
+
+
