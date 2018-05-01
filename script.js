@@ -71,6 +71,7 @@ function init() {
     var btnDub = document.getElementById("btnColorDub");
     var btnNavarra = document.getElementById("btnColorNabarra");
     var btnWenge = document.getElementById("btnColorWenge");
+    
     btnBiela.addEventListener("click", function () {
         changeInfo("farba", "biela")
     });
@@ -87,22 +88,37 @@ function init() {
         changeInfo("farba", "wenge")
     });
 
-// *****************   PREDOK  / SUFLIK / HLAVNY PROBLEM***************
-    var btnSuf3 = document.getElementById("suf3");
-    btnSuf3.addEventListener("click", function () {
+// *****************   PREDOK  / SUFLIK ***************
+// ************* FARBA *************
+    document.getElementById("sufBtnWhite").addEventListener("click", function () {
+      sufZmenFarbu("biela")
+    });
+    document.getElementById("sufBtnRed").addEventListener("click", function () {
+      sufZmenFarbu("cervena")
+    });
+    document.getElementById("sufBtnGrey").addEventListener("click", function () {
+      sufZmenFarbu("siva")
+    });
+
+// ************* ZOBRAZENIE *************
+    document.getElementById("suf3").addEventListener("click", function () {
        sufOnOff(3);
     });
-    var btnSuf2 = document.getElementById("suf2");
-    btnSuf2.addEventListener("click", function () {
+    document.getElementById("suf2").addEventListener("click", function () {
         sufOnOff(2);
     });
-    var btnSuf1 = document.getElementById("suf1");
-    btnSuf1.addEventListener("click", function () {
+    document.getElementById("suf1").addEventListener("click", function () {
         sufOnOff(1);
     });
-    var btnSufA = document.getElementById("sufA");
-    btnSufA.addEventListener("click", drawSufliky);
     
+    
+// **************** TESTOVANIE ***********   
+        document.getElementById("suf1IMG").addEventListener("click", function () {
+        testovanie();
+    });
+            document.getElementById("suf2IMG").addEventListener("click", function () {
+        testovanie();
+    });
 }
 
 
@@ -157,11 +173,25 @@ function drawSufliky() {
     console.log("***************");
 }
 
+function testovanie() {
+    console.log(event.target.id);
+}
+
+
+function sufZmenFarbu(farba) {
+    console.log(event.target.id);
+    for (var i=0; i<sufliky.length; i++) {
+        sufliky[i].farba = farba;
+    }
+    drawSufliky();
+}
+
 //u VSETKYCH suflikov na danej pozicii, bez ohladu na vysku korpusu, zmenim stav zobrazovania
 //takze ked zmenim vysku korpusu, tak na suflik na danej pozicii bude mat vzdy rovnaku hodnotu zbrazovania, bud ano alebo nie
 //takze nieze prvy suflik pri malom regale sa bude zobrazovat, ale ked zmenim vysku regalu, tak tam sa uz zobrazovat nebude, 
 //lebo kazda vyska bude mat vlastne nastavenia
 function sufOnOff(pozicia) {
+    console.log(event.target.id);
     for (var i=0; i<sufliky.length; i++) {
             if (sufliky[i].pozicia===pozicia) {
                 if(sufliky[i].display === "block") {
