@@ -27,6 +27,8 @@ window.onload = function (e) {
 var ctx = null;
 var canvas = null;
 var image = null;
+var akcia = "nic";
+var moznost = "nic";
 
 function init() {
     image = new Image();
@@ -91,18 +93,28 @@ function init() {
 // *****************   PREDOK  / SUFLIK ***************
 // ************* FARBA *************
     document.getElementById("sufBtnWhite").addEventListener("click", function () {
-      sufZmenFarbu("biela")
+        vyber("sufFarba", "biela");
     });
     document.getElementById("sufBtnRed").addEventListener("click", function () {
-      sufZmenFarbu("cervena")
+        vyber("sufFarba", "cervena");
     });
     document.getElementById("sufBtnGrey").addEventListener("click", function () {
-      sufZmenFarbu("siva")
+        vyber("sufFarba", "siva");
     });
+    
+//    document.getElementById("sufBtnWhite").addEventListener("click", function () {
+//        sufZmenFarbu("biela")
+//    });
+//    document.getElementById("sufBtnRed").addEventListener("click", function () {
+//      sufZmenFarbu("cervena")
+//    });
+//    document.getElementById("sufBtnGrey").addEventListener("click", function () {
+//      sufZmenFarbu("siva")
+//    });
 
 // ************* ZOBRAZENIE *************
     document.getElementById("suf3").addEventListener("click", function () {
-       sufOnOff(3);
+        sufOnOff(3);
     });
     document.getElementById("suf2").addEventListener("click", function () {
         sufOnOff(2);
@@ -111,7 +123,7 @@ function init() {
         sufOnOff(1);
     });
     document.getElementById("sufVyhod").addEventListener("click", function () {
-      sufVymaz();
+        vyber("sufVymaz", "X");
     });
     
 }
@@ -140,6 +152,57 @@ function changeInfo(vlastnost, hodnota) {
     drawSufliky();
 }
 
+
+
+
+function vyber(volba, moznyVyber) {
+    akcia = volba;
+    moznost = moznyVyber;
+}
+
+    document.getElementById("suf3IMG").addEventListener("click", function () {
+        vykonajAkciu();
+    });
+    document.getElementById("suf2IMG").addEventListener("click", function () {
+        vykonajAkciu();
+    });
+    document.getElementById("suf1IMG").addEventListener("click", function () {
+        vykonajAkciu();
+    });
+
+
+function vykonajAkciu() {
+    console.log("entering:"+akcia+";"+moznost);
+    var element = event.target.id;
+    var pozicia = 0;
+    if (element.includes("1"))
+        pozicia = 1;
+    else if (element.includes("2"))
+        pozicia = 2;
+    else if (element.includes("3"))
+        pozicia = 3;
+        
+    if (akcia.includes("sufFarba")) {
+        for (var i=0; i<sufliky.length; i++) {
+            if (sufliky[i].pozicia===pozicia) {
+                sufliky[i].farba = moznost;
+            }
+        }
+    }
+    
+    if (akcia.includes("sufVymaz")) {
+        for (var i=0; i<sufliky.length; i++) {
+            if (sufliky[i].pozicia===pozicia) {
+                sufliky[i].display = "none";
+            }
+        }
+    }
+    
+    drawSufliky();
+}
+
+
+
 // ************   ZOBRAZENIE VSETKYCH SUFLIKOV - konkretne nastavenia berie z objectu koordinaty
 function drawSufliky() {
     var vyska = korpus.vyska;
@@ -166,9 +229,9 @@ function drawSufliky() {
             suflikKonkretny.style.display = sufliky[i].display;
             
         }
-        console.log("i: "+i+" ; pozicia: "+sufliky[i].pozicia+" ; farba: "+sufliky[i].farba+" ; zobraz: "+sufliky[i].display);
+//        console.log("i: "+i+" ; pozicia: "+sufliky[i].pozicia+" ; farba: "+sufliky[i].farba+" ; zobraz: "+sufliky[i].display);
     }
-    console.log("***************");
+//    console.log("***************");
 }
 
 //podla vysky korpusu zisti max pocet suflikov v tejto vyske a vsetky sufliky mimo tejto vysky vypne
@@ -246,34 +309,33 @@ function sufVymaz() {
 //u VSETKYCH suflikov na danej pozicii, bez ohladu na vysku korpusu, zmenim farbu
 //najprv zistim, ktoru farbu klikol, pomocou atributu v hlavnej funkcii, nasledne kliknutie na niektory suflik spusti druhu funkciu,
 //ktora zisti na ktory SVG klikol a na tychto poziciach zmeni farbu suflikov
-function sufZmenFarbu(farbaKliknuta) {
-    document.getElementById("suf1IMG").addEventListener("click", function () {
-        zistiPoziciu();
-    });
-    document.getElementById("suf2IMG").addEventListener("click", function () {
-        zistiPoziciu();
-    });
-    document.getElementById("suf3IMG").addEventListener("click", function () {
-        zistiPoziciu();
-    });
-    
-    function zistiPoziciu() {
-        var element = event.target.id;
-        var pozicia = 0;
-        if (element.includes("1"))
-            pozicia = 1;
-        else if (element.includes("2"))
-            pozicia = 2;
-        else if (element.includes("3"))
-            pozicia = 3;
-        
-        for (var i=0; i<sufliky.length; i++) {
-
-                if (sufliky[i].pozicia===pozicia) {
-                    sufliky[i].farba = farbaKliknuta;
-                }
-        }
-        drawSufliky();
-    }
-}
+//function sufZmenFarbu(farbaKliknuta) {
+//    document.getElementById("suf1IMG").addEventListener("click", function () {
+//        zistiPoziciu();
+//    });
+//    document.getElementById("suf2IMG").addEventListener("click", function () {
+//        zistiPoziciu();
+//    });
+//    document.getElementById("suf3IMG").addEventListener("click", function () {
+//        zistiPoziciu();
+//    });
+//    
+//    function zistiPoziciu() {
+//        var element = event.target.id;
+//        var pozicia = 0;
+//        if (element.includes("1"))
+//            pozicia = 1;
+//        else if (element.includes("2"))
+//            pozicia = 2;
+//        else if (element.includes("3"))
+//            pozicia = 3;
+//        
+//        for (var i=0; i<sufliky.length; i++) {
+//                if (sufliky[i].pozicia===pozicia) {
+//                    sufliky[i].farba = farbaKliknuta;
+//                }
+//        }
+//        drawSufliky();
+//    }
+//}
 
