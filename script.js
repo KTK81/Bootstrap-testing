@@ -173,8 +173,9 @@ function vyber(volba, moznyVyber) {
 
 function vykonajAkciu() {
     console.log("entering:"+akcia+";"+moznost);
-    var element = event.target.id;
+    //zistim, ktory suflik spustil funkciu
     var pozicia = 0;
+    var element = event.target.id;
     if (element.includes("1"))
         pozicia = 1;
     else if (element.includes("2"))
@@ -194,6 +195,7 @@ function vykonajAkciu() {
         for (var i=0; i<sufliky.length; i++) {
             if (sufliky[i].pozicia===pozicia) {
                 sufliky[i].display = "none";
+                sufliky[i].farba = "biela";
             }
         }
     }
@@ -252,6 +254,7 @@ function sufVypniMimoKorpus() {
             var suflikCislo = "svgSuflik"+sufliky[j].pozicia;
             var suflikKonkretny=document.getElementById(suflikCislo);
             suflikKonkretny.style.display = "none";
+            suflikKonkretny.style.farba = "biela";
         }
     }
 }
@@ -274,68 +277,4 @@ function sufOnOff(pozicia) {
     drawSufliky();
 }
 
-
-function sufVymaz() {
-     document.getElementById("suf1IMG").addEventListener("click", function () {
-        zistiPoziciu();
-    });
-    document.getElementById("suf2IMG").addEventListener("click", function () {
-        zistiPoziciu();
-    });
-    document.getElementById("suf3IMG").addEventListener("click", function () {
-        zistiPoziciu();
-    });
-    
-    function zistiPoziciu() {
-        var element = event.target.id;
-        var pozicia = 0;
-        if (element.includes("1"))
-            pozicia = 1;
-        else if (element.includes("2"))
-            pozicia = 2;
-        else if (element.includes("3"))
-            pozicia = 3;
-        
-        for (var i=0; i<sufliky.length; i++) {
-                if (sufliky[i].pozicia===pozicia) {
-                    sufliky[i].display = "none";
-                }
-        }
-    }
-    drawSufliky();
-}
-
-
-//u VSETKYCH suflikov na danej pozicii, bez ohladu na vysku korpusu, zmenim farbu
-//najprv zistim, ktoru farbu klikol, pomocou atributu v hlavnej funkcii, nasledne kliknutie na niektory suflik spusti druhu funkciu,
-//ktora zisti na ktory SVG klikol a na tychto poziciach zmeni farbu suflikov
-//function sufZmenFarbu(farbaKliknuta) {
-//    document.getElementById("suf1IMG").addEventListener("click", function () {
-//        zistiPoziciu();
-//    });
-//    document.getElementById("suf2IMG").addEventListener("click", function () {
-//        zistiPoziciu();
-//    });
-//    document.getElementById("suf3IMG").addEventListener("click", function () {
-//        zistiPoziciu();
-//    });
-//    
-//    function zistiPoziciu() {
-//        var element = event.target.id;
-//        var pozicia = 0;
-//        if (element.includes("1"))
-//            pozicia = 1;
-//        else if (element.includes("2"))
-//            pozicia = 2;
-//        else if (element.includes("3"))
-//            pozicia = 3;
-//        
-//        for (var i=0; i<sufliky.length; i++) {
-//                if (sufliky[i].pozicia===pozicia) {
-//                    sufliky[i].farba = farbaKliknuta;
-//                }
-//        }
-//        drawSufliky();
-//    }
-//}
 
