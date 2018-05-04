@@ -11,11 +11,11 @@ var korpus = {
 };
 
 var sufliky = [
-    {zaradenie: "v20", pozicia: 2, startX: 130, startY: 160, endX: "588", endY: "368", sirka:"64.2%", vyska:"26.5%", farba: "biela", display:"none"},
-    {zaradenie: "v20", pozicia: 1, startX: 130, startY: 370, endX: "588", endY: "583", sirka:"64.2%", vyska:"26.5%", farba: "biela", display:"none"},
-    {zaradenie: "v30", pozicia: 3, startX: 124, startY: 54, endX: "583", endY: "263", sirka:"64.2%", vyska:"26.5%", farba: "biela", display:"none"},
-    {zaradenie: "v30", pozicia: 2, startX: 124, startY: 265, endX: "583", endY: "475", sirka:"64.2%", vyska:"26.5%", farba: "biela", display:"none"},
-    {zaradenie: "v30", pozicia: 1, startX: 124, startY: 478, endX: "583", endY: "691", sirka:"64.2%", vyska:"26.5%", farba: "biela", display:"none"},
+    {zaradenie: "v20", pozicia: 2, startX: 130, startY: 160, endX: "588", endY: "368", sirka:"64.2%", vyska:"26.5%", farba: "biela", display:"none", selected:false},
+    {zaradenie: "v20", pozicia: 1, startX: 130, startY: 370, endX: "588", endY: "583", sirka:"64.2%", vyska:"26.5%", farba: "biela", display:"none", selected:false},
+    {zaradenie: "v30", pozicia: 3, startX: 124, startY: 54, endX: "583", endY: "263", sirka:"64.2%", vyska:"26.5%", farba: "biela", display:"none", selected:false},
+    {zaradenie: "v30", pozicia: 2, startX: 124, startY: 265, endX: "583", endY: "475", sirka:"64.2%", vyska:"26.5%", farba: "biela", display:"none", selected:false},
+    {zaradenie: "v30", pozicia: 1, startX: 124, startY: 478, endX: "583", endY: "691", sirka:"64.2%", vyska:"26.5%", farba: "biela", display:"none", selected:false},
 ];
 
 window.onload = function (e) {
@@ -102,15 +102,6 @@ function init() {
         vyber("sufFarba", "siva");
     });
     
-//    document.getElementById("sufBtnWhite").addEventListener("click", function () {
-//        sufZmenFarbu("biela")
-//    });
-//    document.getElementById("sufBtnRed").addEventListener("click", function () {
-//      sufZmenFarbu("cervena")
-//    });
-//    document.getElementById("sufBtnGrey").addEventListener("click", function () {
-//      sufZmenFarbu("siva")
-//    });
 
 // ************* ZOBRAZENIE *************
     document.getElementById("suf3").addEventListener("click", function () {
@@ -122,8 +113,12 @@ function init() {
     document.getElementById("suf1").addEventListener("click", function () {
         sufOnOff(1);
     });
+    document.getElementById("sufBtnAdd").addEventListener("click", function () {
+        zobrazVsetkySufliky();
+    });
     document.getElementById("sufVyhod").addEventListener("click", function () {
-        vyber("sufVymaz", "X");
+//        vyber("sufVymaz", "X");
+        vymazNekliknuteSuf();
     });
     
 }
@@ -154,7 +149,8 @@ function changeInfo(vlastnost, hodnota) {
 
 
 
-
+//pomocou tychto premennych si urcim, co ma robit hlavna funkcia na sufliky
+//takze ich zmenou, menim aj to, co robi hlavna funkcia
 function vyber(volba, moznyVyber) {
     akcia = volba;
     moznost = moznyVyber;
@@ -183,6 +179,7 @@ function vykonajAkciu() {
     else if (element.includes("3"))
         pozicia = 3;
         
+    //podla toho
     if (akcia.includes("sufFarba")) {
         for (var i=0; i<sufliky.length; i++) {
             if (sufliky[i].pozicia===pozicia) {
@@ -195,11 +192,39 @@ function vykonajAkciu() {
         for (var i=0; i<sufliky.length; i++) {
             if (sufliky[i].pozicia===pozicia) {
                 sufliky[i].display = "none";
+                sufliky[i].selected = false;
                 sufliky[i].farba = "biela";
             }
         }
     }
     
+    if (akcia.includes("sufPridaj")) {
+        for (var i=0; i<sufliky.length; i++) {
+            if (sufliky[i].pozicia===pozicia) {
+                sufliky[i].display = "block";
+                sufliky[i].selected = true;
+                sufliky[i].farba = "biela";
+            }
+        }
+    }
+    
+    drawSufliky();
+}
+
+function zobrazVsetkySufliky() {
+    for (var i=0; i<sufliky.length; i++) {
+        if ((sufliky[i].selected===false)&&(sufliky[i].display==="none"))
+            sufliky[i].display="block";
+    }
+    vyber("sufPridaj", "X");
+    drawSufliky();
+}
+
+function vymazNekliknuteSuf() {
+    for (var i=0; i<sufliky.length; i++) {
+        if ((sufliky[i].selected===false)&&(sufliky[i].display==="block"))
+            sufliky[i].display="none";
+    }
     drawSufliky();
 }
 
@@ -254,6 +279,7 @@ function sufVypniMimoKorpus() {
             var suflikCislo = "svgSuflik"+sufliky[j].pozicia;
             var suflikKonkretny=document.getElementById(suflikCislo);
             suflikKonkretny.style.display = "none";
+            suflikKonkretny.style.selected = false;
             suflikKonkretny.style.farba = "biela";
         }
     }
@@ -269,9 +295,12 @@ function sufOnOff(pozicia) {
             if (sufliky[i].pozicia===pozicia) {
                 if(sufliky[i].display === "block") {
                     sufliky[i].display = "none";
+                    sufliky[i].selected = false;
                     }
-                else
+                else {
                     sufliky[i].display = "block";
+                    sufliky[i].selected = true;
+                }
             }            
     }
     drawSufliky();
