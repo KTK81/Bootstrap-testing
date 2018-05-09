@@ -25,8 +25,6 @@ window.onload = function (e) {
     changeInfo("vyska", "v20");
 }
 
-var ctx = null;
-var canvas = null;
 var image = null;
 var akcia = "nic";
 var moznost = "nic";
@@ -92,15 +90,6 @@ function init() {
     
 
 // ************* ZOBRAZENIE *************
-    $("#suf3").click(function () {
-        sufOnOff(3);
-    });
-    $("#suf2").click(function () {
-        sufOnOff(2);
-    });
-    $("#suf1").click(function () {
-        sufOnOff(1);
-    });
     $("#sufBtnAdd").click(function () {
         zobrazVsetkySufliky();
     });
@@ -267,25 +256,4 @@ function sufVypniMimoKorpus() {
             suflikKonkretny.style.farba = "biela";
         }
     }
-}
-
-//u VSETKYCH suflikov na danej pozicii, bez ohladu na vysku korpusu, zmenim stav zobrazovania
-//takze ked zmenim vysku korpusu, tak na suflik na danej pozicii bude mat vzdy rovnaku hodnotu zbrazovania, bud ano alebo nie
-//takze nieze prvy suflik pri malom regale sa bude zobrazovat, ale ked zmenim vysku regalu, tak tam sa uz zobrazovat nebude, 
-//lebo kazda vyska bude mat vlastne nastavenia
-function sufOnOff(pozicia) {
-    console.log(event.target.id);
-    for (var i=0; i<sufliky.length; i++) {
-            if (sufliky[i].pozicia===pozicia) {
-                if(sufliky[i].display === "block") {
-                    sufliky[i].display = "none";
-                    sufliky[i].selected = false;
-                    }
-                else {
-                    sufliky[i].display = "block";
-                    sufliky[i].selected = true;
-                }
-            }            
-    }
-    drawSufliky();
 }
