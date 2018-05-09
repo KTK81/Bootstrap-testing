@@ -1,3 +1,4 @@
+//313 riadkov - pred jquery
 var korpus = {
     pomocnyNazov: "pic\\korpus-",
     zaradenie: "NS2",
@@ -31,96 +32,81 @@ var akcia = "nic";
 var moznost = "nic";
 
 function init() {
+
     image = new Image();
 
 
 //***** horne hlavne menu **** MENU + funkcie na zobrazenie len vybranych <div> elementov **********************************
-    var menuRozmery = document.getElementById("navRozmery");
-    var menuFarba = document.getElementById("navFarba");
-    var menuSuflik = document.getElementById("navSuflik");
-    var menuAll = document.getElementById("navAll");
+    $("#navRozmery").click(function() {
+       showChoice("block", "none", "none")
+   });
+    $("#navFarba").click(function() {
+       showChoice("none", "block", "none")
+   });
+    $("#navSuflik").click(function() {
+       showChoice("none", "none", "block")
+   });    
+    $("#navAll").click(function() {
+       showChoice("block", "block", "block")
+   });    
 
-    menuRozmery.addEventListener("click", function () {
-        showChoice("block", "none", "none")
-    });
-    menuFarba.addEventListener("click", function () {
-        showChoice("none", "block", "none")
-    });
-    menuSuflik.addEventListener("click", function () {
-        showChoice("none", "none", "block")
-    });
-    menuAll.addEventListener("click", function () {
-        showChoice("block", "block", "block")
-    });
-
-
-        
 //********************************************   ROZNE MANIPULACIE SO SAMOTNYM OBRAZKOM *************************************
     
 // *************** ROZMERY **************
-    var btnHeight10 = document.getElementById("btnH10");
-    var btnHeight20 = document.getElementById("btnH20");
-    btnHeight10.addEventListener("click", function () {
+
+    $("#btnH10").click(function(){
         changeInfo("vyska", "v20")
     });
-    btnHeight20.addEventListener("click", function () {
+    $("#btnH20").click(function(){
         changeInfo("vyska", "v30")
     });
 
+
 //       ***** FARBY ********************
-    var btnBiela = document.getElementById("btnColorBiela");
-    var btnBuk = document.getElementById("btnColorBuk");
-    var btnDub = document.getElementById("btnColorDub");
-    var btnNavarra = document.getElementById("btnColorNabarra");
-    var btnWenge = document.getElementById("btnColorWenge");
-    
-    btnBiela.addEventListener("click", function () {
+    $("#btnColorBiela").click(function(){
         changeInfo("farba", "biela")
     });
-    btnBuk.addEventListener("click", function () {
+    $("#btnColorBuk").click(function(){
         changeInfo("farba", "buk")
     });
-    btnDub.addEventListener("click", function () {
+    $("#btnColorDub").click(function(){
         changeInfo("farba", "dub")
     });
-    btnNavarra.addEventListener("click", function () {
+    $("#btnColorNabarra").click(function(){
         changeInfo("farba", "navarra")
     });
-    btnWenge.addEventListener("click", function () {
+    $("#btnColorWenge").click(function(){
         changeInfo("farba", "wenge")
     });
-
 // *****************   PREDOK  / SUFLIK ***************
 // ************* FARBA *************
-    document.getElementById("sufBtnWhite").addEventListener("click", function () {
+    $("#sufBtnWhite").click(function () {
         vyber("sufFarba", "biela");
     });
-    document.getElementById("sufBtnRed").addEventListener("click", function () {
+    $("#sufBtnRed").click(function () {
         vyber("sufFarba", "cervena");
     });
-    document.getElementById("sufBtnGrey").addEventListener("click", function () {
+    $("#sufBtnGrey").click(function () {
         vyber("sufFarba", "siva");
-    });
+    });    
     
 
 // ************* ZOBRAZENIE *************
-    document.getElementById("suf3").addEventListener("click", function () {
+    $("#suf3").click(function () {
         sufOnOff(3);
     });
-    document.getElementById("suf2").addEventListener("click", function () {
+    $("#suf2").click(function () {
         sufOnOff(2);
     });
-    document.getElementById("suf1").addEventListener("click", function () {
+    $("#suf1").click(function () {
         sufOnOff(1);
     });
-    document.getElementById("sufBtnAdd").addEventListener("click", function () {
+    $("#sufBtnAdd").click(function () {
         zobrazVsetkySufliky();
     });
-    document.getElementById("sufVyhod").addEventListener("click", function () {
-//        vyber("sufVymaz", "X");
-        vymazNekliknuteSuf();
+    $("#sufVyhod").click(function () {
+        vyber("sufVymaz", "X");
     });
-    
 }
 
 function testovanie() {
@@ -129,6 +115,7 @@ function testovanie() {
 
 //vyber menu
 function showChoice(rozmer, farba, predok) {
+    vymazNekliknuteSuf();
     document.getElementById("vyberRozmer").style.display = rozmer;
     document.getElementById("vyberFarba").style.display = farba;
     document.getElementById("vyberPredok").style.display = predok;
@@ -138,6 +125,7 @@ function showChoice(rozmer, farba, predok) {
 //zmeni dany parameter v objecte, nacita z objectu novu verziu suboru k obrazku, zobrazi novy obrazok, zobrazi sufliky
 //zmeni hlavny obrazok
 function changeInfo(vlastnost, hodnota) {
+    vymazNekliknuteSuf();
     var mainPicture = document.getElementById("mainPicture");
     korpus[vlastnost] = hodnota;
     image.src = korpus.obrSubor();
@@ -148,24 +136,19 @@ function changeInfo(vlastnost, hodnota) {
 }
 
 
-
 //pomocou tychto premennych si urcim, co ma robit hlavna funkcia na sufliky
 //takze ich zmenou, menim aj to, co robi hlavna funkcia
 function vyber(volba, moznyVyber) {
+    if (volba!=="sufPridaj") {
+        vymazNekliknuteSuf();
+    }
     akcia = volba;
     moznost = moznyVyber;
 }
 
-    document.getElementById("suf3IMG").addEventListener("click", function () {
-        vykonajAkciu();
-    });
-    document.getElementById("suf2IMG").addEventListener("click", function () {
-        vykonajAkciu();
-    });
-    document.getElementById("suf1IMG").addEventListener("click", function () {
-        vykonajAkciu();
-    });
-
+$(".suflikClass").click(function() {
+    vykonajAkciu();
+});
 
 function vykonajAkciu() {
     console.log("entering:"+akcia+";"+moznost);
@@ -256,9 +239,9 @@ function drawSufliky() {
             suflikKonkretny.style.display = sufliky[i].display;
             
         }
-//        console.log("i: "+i+" ; pozicia: "+sufliky[i].pozicia+" ; farba: "+sufliky[i].farba+" ; zobraz: "+sufliky[i].display);
+        console.log("i: "+i+" ; pozicia: "+sufliky[i].pozicia+" ; farba: "+sufliky[i].farba+" ; zobraz: "+sufliky[i].display);
     }
-//    console.log("***************");
+    console.log("***************");
 }
 
 //podla vysky korpusu zisti max pocet suflikov v tejto vyske a vsetky sufliky mimo tejto vysky vypne
@@ -275,11 +258,12 @@ function sufVypniMimoKorpus() {
     for (var j=0; j<sufliky.length;j++) {
         if (sufliky[j].pozicia>maxSuflik) {
             sufliky[j].display="none";
+            sufliky[j].selected=false;
             sufliky[j].farba="biela";
             var suflikCislo = "svgSuflik"+sufliky[j].pozicia;
             var suflikKonkretny=document.getElementById(suflikCislo);
             suflikKonkretny.style.display = "none";
-            suflikKonkretny.style.selected = false;
+            suflikKonkretny.style.selected =false;
             suflikKonkretny.style.farba = "biela";
         }
     }
@@ -305,5 +289,3 @@ function sufOnOff(pozicia) {
     }
     drawSufliky();
 }
-
-
