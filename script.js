@@ -257,3 +257,25 @@ function sufVypniMimoKorpus() {
         }
     }
 }
+
+$("#btnQuery").click(function () {
+   vytvorQuery(); 
+});
+
+function vytvorQuery() {
+    var premenna="";
+    var pomocna="";
+    for (var i=0; i<sufliky.length; i++) {
+        pomocna+="s"+i;
+        if (sufliky[i].farba.includes("biela"))
+            pomocna+=("b");
+        else if (sufliky[i].farba.includes("cervena"))
+            pomocna+=("c");
+        else if (sufliky[i].farba.includes("siva"))
+            pomocna+=("s");
+        
+    }
+    console.log(pomocna);
+}
+
+
