@@ -228,9 +228,9 @@ function drawSufliky() {
             suflikKonkretny.style.display = sufliky[i].display;
             
         }
-        console.log("i: "+i+" ; pozicia: "+sufliky[i].pozicia+" ; farba: "+sufliky[i].farba+" ; zobraz: "+sufliky[i].display);
+//        console.log("i: "+i+" ; pozicia: "+sufliky[i].pozicia+" ; farba: "+sufliky[i].farba+" ; zobraz: "+sufliky[i].display);
     }
-    console.log("***************");
+//    console.log("***************");
 }
 
 //podla vysky korpusu zisti max pocet suflikov v tejto vyske a vsetky sufliky mimo tejto vysky vypne
@@ -258,24 +258,85 @@ function sufVypniMimoKorpus() {
     }
 }
 
-$("#btnQuery").click(function () {
+$("#btnQueryVytvor").click(function () {
    vytvorQuery(); 
+});
+
+$("#btnQueryZisti").click(function () {
+   rozlozQuery(); 
 });
 
 function vytvorQuery() {
     var premenna="";
     var pomocna="";
     for (var i=0; i<sufliky.length; i++) {
-        pomocna+="s"+i;
+        pomocna+="&s"+i;
         if (sufliky[i].farba.includes("biela"))
-            pomocna+=("b");
+            pomocna+=("bi");
         else if (sufliky[i].farba.includes("cervena"))
-            pomocna+=("c");
+            pomocna+=("ce");
         else if (sufliky[i].farba.includes("siva"))
-            pomocna+=("s");
-        
+            pomocna+=("si");
+        if (sufliky[i].display.includes("none"))
+            pomocna+=("X");
+        else if (sufliky[i].display.includes("block"))
+            pomocna+=("A");
+        if (sufliky[i].selected===false)
+            pomocna+=("fa");
+        else if (sufliky[i].selected===true)
+            pomocna+=("tr");
     }
     console.log(pomocna);
+}
+
+function rozlozQuery() {
+    var str = "s0siAtr&s1ceAtr&s2biAtr&s3siAtr&s4ceAtr";
+    var res = str.split("&");
+    var farba = "biela";
+    var zobraz = "none";
+    var vyber = false;
+    for (var i=0; i<res.length; i++) {
+        console.log("pozicia:"+sufliky[i].pozicia);
+        if (res[i].includes("X")) {
+            sufliky[i].display="none";
+            console.log(" display:none ");
+        }
+        else if (res[i].includes("A")) {
+            sufliky[i].display="block";
+            console.log(" display:block ");
+        }
+        if (res[i].includes("fa")) {
+            sufliky[i].selected=false;
+            console.log(" selected:false ");
+
+        }
+        else if (res[i].includes("tr")) {   
+            sufliky[i].selected=true;
+            console.log(" selected:true ");
+        }
+        
+        if (res[i].includes("bi")) {
+            sufliky[i].farba=("biela");
+            console.log(" farba:biela ");
+        }
+        if (res[i].includes("ce")) {
+            sufliky[i].farba=("cervena");
+            console.log(" farba:cervena ");
+        }
+        if (res[i].includes("si")) {
+            sufliky[i].farba=("siva");
+            console.log(" farba:siva ");
+        }
+        console.log(" ***************** ");
+        
+    }
+    
+    drawSufliky();
+    console.log(res);
+    console.log(res[2]);
+//    document.getElementById("demo").innerHTML = res;
+    
+    
 }
 
 
